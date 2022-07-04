@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "nocaet:block/stripped_wood01",
+    "side": "nocaet:block/stripped_wood01"
+  }
+}

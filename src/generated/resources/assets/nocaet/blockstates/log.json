@@ -1,0 +1,58 @@
+{
+  "variants": {
+    "axis=x": [
+      {
+        "model": "nocaet:block/wood1",
+        "x": 90,
+        "y": 90
+      },
+      {
+        "model": "nocaet:block/wood2",
+        "x": 90,
+        "y": 90
+      },
+      {
+        "model": "nocaet:block/wood3",
+        "x": 90,
+        "y": 90
+      },
+      {
+        "model": "nocaet:block/wood4",
+        "x": 90,
+        "y": 90
+      }
+    ],
+    "axis=y": [
+      {
+        "model": "nocaet:block/wood1"
+      },
+      {
+        "model": "nocaet:block/wood2"
+      },
+      {
+        "model": "nocaet:block/wood3"
+      },
+      {
+        "model": "nocaet:block/wood4"
+      }
+    ],
+    "axis=z": [
+      {
+        "model": "nocaet:block/wood1",
+        "x": 90
+      },
+      {
+        "model": "nocaet:block/wood2",
+        "x": 90
+      },
+      {
+        "model": "nocaet:block/wood3",
+        "x": 90
+      },
+      {
+        "model": "nocaet:block/wood4",
+        "x": 90
+      }
+    ]
+  }
+}

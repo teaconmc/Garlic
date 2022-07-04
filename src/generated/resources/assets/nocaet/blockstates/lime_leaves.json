@@ -1,0 +1,30 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "nocaet:block/leaves1",
+        "y": 90
+      },
+      {
+        "model": "nocaet:block/leaves1",
+        "y": 180
+      },
+      {
+        "model": "nocaet:block/leaves1",
+        "y": 270
+      },
+      {
+        "model": "nocaet:block/leaves2",
+        "y": 90
+      },
+      {
+        "model": "nocaet:block/leaves2",
+        "y": 180
+      },
+      {
+        "model": "nocaet:block/leaves2",
+        "y": 270
+      }
+    ]
+  }
+}
