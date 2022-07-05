@@ -1,6 +1,6 @@
 package org.teacon.nocaet.command;
 
-import com.mojang.brigadier.arguments.DoubleArgumentType;
+import com.mojang.brigadier.arguments.FloatArgumentType;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import com.mojang.brigadier.context.CommandContext;
 import net.minecraft.commands.CommandSourceStack;
@@ -18,14 +18,14 @@ public class SetProgressCommand {
     public static void register(LiteralArgumentBuilder<CommandSourceStack> builder) {
         builder.then(
             Commands.literal("progress")
-                .then(Commands.argument("value", DoubleArgumentType.doubleArg(0, 1))
+                .then(Commands.argument("value", FloatArgumentType.floatArg(0, 1))
                     .requires(GarlicCommands.hasPermission(GarlicCommands.SEND_PROGRESS))
                     .executes(SetProgressCommand::sendProgress))
         );
     }
 
     private static int sendProgress(CommandContext<CommandSourceStack> context) {
-        double progress = DoubleArgumentType.getDouble(context, "value");
+        var progress = FloatArgumentType.getFloat(context, "value");
         GarlicChannel.getChannel().send(PacketDistributor.ALL.noArg(), new SetProgressPacket(progress));
         // sync only on dedicated servers
         DistExecutor.unsafeRunWhenOn(Dist.DEDICATED_SERVER, () -> () -> {

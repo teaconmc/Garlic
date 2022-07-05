@@ -6,14 +6,14 @@ import net.minecraftforge.network.PacketDistributor;
 
 import java.util.function.Supplier;
 
-public record SyncProgressPacket(double progress) {
+public record SyncProgressPacket(float progress) {
 
     public SyncProgressPacket(FriendlyByteBuf buf) {
-        this(buf.readDouble());
+        this(buf.readFloat());
     }
 
     public void write(FriendlyByteBuf buf) {
-        buf.writeDouble(this.progress);
+        buf.writeFloat(this.progress);
     }
 
     public void handle(Supplier<NetworkEvent.Context> ctx) {
