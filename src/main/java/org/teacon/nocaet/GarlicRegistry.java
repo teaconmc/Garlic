@@ -3,7 +3,6 @@ package org.teacon.nocaet;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
@@ -44,7 +43,7 @@ public class GarlicRegistry {
     }
 
     static {
-        for (var block : List.of("log", "log_strip"/*, "branch", "root"*/)) {
+        for (var block : List.of("log", "log_strip")) {
             itemBlock(block, () -> new TransparentLogBlock(
                 BlockBehaviour.Properties.of(Material.WOOD).strength(2.5F).sound(SoundType.WOOD)
             ));
@@ -56,21 +55,18 @@ public class GarlicRegistry {
                     .lightLevel(s -> 15).emissiveRendering((a, b, c) -> true)
             ));
         }
-        for (var color : DyeColor.values()) {
-            if (color.getId() < 16) {
-                var name = color.getName() + "_" + "leaves";
-                itemBlock(name, () -> new TransparentLeavesBlock(
-                    BlockBehaviour.Properties.of(Material.LEAVES).strength(0.2F).sound(SoundType.GRASS).noOcclusion()
-                ));
-                itemBlock(name + "_shadow", () -> new Block(
-                    BlockBehaviour.Properties.of(Material.LEAVES).strength(0.2F).sound(SoundType.GRASS).noOcclusion()
-                ));
-                itemBlock(name + "_light", () -> new TransparentLeavesBlock(
-                    BlockBehaviour.Properties.of(Material.LEAVES).strength(0.2F).sound(SoundType.GRASS).noOcclusion()
-                        .lightLevel(s -> 15).emissiveRendering((a, b, c) -> true)
-                ));
-            }
-        }
+        itemBlock("leaves", () -> new TransparentLeavesBlock(
+            BlockBehaviour.Properties.of(Material.LEAVES).strength(0.2F).sound(SoundType.GRASS).noOcclusion()
+                .isValidSpawn((a, b, c, d) -> false)
+        ));
+        itemBlock("leaves_shadow", () -> new Block(
+            BlockBehaviour.Properties.of(Material.LEAVES).strength(0.2F).sound(SoundType.GRASS).noOcclusion()
+                .isValidSpawn((a, b, c, d) -> false)
+        ));
+        itemBlock("leaves_light", () -> new TransparentLeavesBlock(
+            BlockBehaviour.Properties.of(Material.LEAVES).strength(0.2F).sound(SoundType.GRASS).noOcclusion()
+                .isValidSpawn((a, b, c, d) -> false).lightLevel(s -> 15).emissiveRendering((a, b, c) -> true)
+        ));
     }
 
     private static final Set<Item> FLAMES = new HashSet<>();

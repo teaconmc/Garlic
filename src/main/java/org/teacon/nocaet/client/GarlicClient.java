@@ -46,11 +46,8 @@ public class GarlicClient {
     private static void blockColor(ColorHandlerEvent.Item event) {
         for (RegistryObject<Block> object : GarlicRegistry.BLOCKS.getEntries()) {
             var path = object.get().getRegistryName().getPath();
-            if (path.contains("_leaves")) {
-                var color = path.substring(0, path.indexOf("_leaves"));
-                var dyeColor = DyeColor.byName(color, DyeColor.WHITE);
-                if (false) event.getBlockColors().register((state, level, pos, tintIndex) -> dyeColor.getMaterialColor().col, object.get());
-                event.getItemColors().register((stack, tintIndex) -> dyeColor.getMaterialColor().col, object.get().asItem());
+            if (path.contains("leaves")) {
+                event.getItemColors().register((stack, tintIndex) -> DyeColor.YELLOW.getMaterialColor().col, object.get().asItem());
             }
         }
     }
