@@ -21,7 +21,7 @@ public class GarlicRenderTypes extends RenderType {
     public static final RenderType CUTOUT = RenderType.create(
         "cutout_nocaet", DefaultVertexFormat.BLOCK, VertexFormat.Mode.QUADS, 2097152,
         true, false, RenderType.CompositeState.builder()
-            .setLightmapState(LIGHTMAP).setShaderState(GarlicShaders.CUTOUT_STATE)
+            .setLightmapState(NO_LIGHTMAP).setShaderState(GarlicShaders.CUTOUT_STATE)
             .setTextureState(BLOCK_SHEET).createCompositeState(true)
     );
 }

@@ -49,7 +49,7 @@ public class GarlicClient {
             if (path.contains("_leaves")) {
                 var color = path.substring(0, path.indexOf("_leaves"));
                 var dyeColor = DyeColor.byName(color, DyeColor.WHITE);
-                event.getBlockColors().register((state, level, pos, tintIndex) -> dyeColor.getMaterialColor().col, object.get());
+                if (false) event.getBlockColors().register((state, level, pos, tintIndex) -> dyeColor.getMaterialColor().col, object.get());
                 event.getItemColors().register((stack, tintIndex) -> dyeColor.getMaterialColor().col, object.get().asItem());
             }
         }

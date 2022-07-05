@@ -19,6 +19,6 @@ in vec4 normal;
 out vec4 fragColor;
 
 void main() {
-    vec4 color = texture(Sampler0, texCoord0) * vertexColor * ColorModulator * abs(1.0-mod(GameTime*600.0,2.0)+nocaetProgress);
+    vec4 color = texture(Sampler0, texCoord0) * vertexColor * ColorModulator;
     fragColor = linear_fog(color, vertexDistance, FogStart, FogEnd, FogColor);
 }
