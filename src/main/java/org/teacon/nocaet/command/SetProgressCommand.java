@@ -5,13 +5,14 @@ import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import com.mojang.brigadier.context.CommandContext;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
+import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.network.PacketDistributor;
 import net.minecraftforge.server.ServerLifecycleHooks;
 import org.teacon.nocaet.network.GarlicChannel;
-import org.teacon.nocaet.network.SetProgressPacket;
-import org.teacon.nocaet.network.SyncProgressPacket;
+import org.teacon.nocaet.network.play.SetProgressPacket;
+import org.teacon.nocaet.network.proxy.SyncProgressPacket;
 
 public class SetProgressCommand {
 
@@ -32,6 +33,7 @@ public class SetProgressCommand {
             ServerLifecycleHooks.getCurrentServer().getPlayerList().getPlayers().stream().findAny().ifPresent(it ->
                 GarlicChannel.getProxyChannel().send(PacketDistributor.PLAYER.with(() -> it), new SyncProgressPacket(progress)));
         });
+        context.getSource().sendSuccess(new TranslatableComponent("nocaet.command.progress", String.format("%.3f", progress)), false);
         return 1;
     }
 }

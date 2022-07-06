@@ -10,6 +10,7 @@ import org.teacon.nocaet.client.GarlicClient;
 import org.teacon.nocaet.command.GarlicCommands;
 import org.teacon.nocaet.data.GarlicData;
 import org.teacon.nocaet.network.GarlicChannel;
+import org.teacon.nocaet.network.capability.GarlicCapability;
 
 @Mod(GarlicMod.MODID)
 public class GarlicMod {
@@ -22,6 +23,7 @@ public class GarlicMod {
         GarlicRegistry.register();
         GarlicCommands.init();
         GarlicChannel.init();
+        GarlicCapability.init();
         FMLJavaModLoadingContext.get().getModEventBus().addListener(GarlicData::register);
         DistExecutor.safeRunWhenOn(Dist.CLIENT, () -> GarlicClient::init);
     }

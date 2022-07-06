@@ -1,14 +1,14 @@
-package org.teacon.nocaet.network;
+package org.teacon.nocaet.network.play;
 
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraftforge.network.NetworkEvent;
-import net.minecraftforge.network.PacketDistributor;
+import org.teacon.nocaet.client.GarlicShaders;
 
 import java.util.function.Supplier;
 
-public record SyncProgressPacket(float progress) {
+public record SetProgressPacket(float progress) {
 
-    public SyncProgressPacket(FriendlyByteBuf buf) {
+    public SetProgressPacket(FriendlyByteBuf buf) {
         this(buf.readFloat());
     }
 
@@ -17,7 +17,7 @@ public record SyncProgressPacket(float progress) {
     }
 
     public void handle(Supplier<NetworkEvent.Context> ctx) {
-        GarlicChannel.getChannel().send(PacketDistributor.ALL.noArg(), new SetProgressPacket(progress));
+        GarlicShaders.setProgress(progress);
         ctx.get().setPacketHandled(true);
     }
 }
