@@ -12,7 +12,7 @@ public class GarlicCapability {
 
     public static void init() {
         FMLJavaModLoadingContext.get().getModEventBus().addListener(GarlicCapability::register);
-        MinecraftForge.EVENT_BUS.addListener(GarlicCapability::attach);
+        MinecraftForge.EVENT_BUS.addGenericListener(Entity.class, GarlicCapability::attach);
     }
 
     private static void register(RegisterCapabilitiesEvent event) {
