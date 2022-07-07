@@ -13,18 +13,18 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.StandardCopyOption;
 import java.util.concurrent.TimeUnit;
 
 public final class GarlicBungee extends Plugin implements Listener {
 
-    private Path data, dataOld;
+    private Path data;
     private final PlayerData playerData = new PlayerData();
 
     @Override
     public void onEnable() {
         this.getProxy().registerChannel("nocaet:proxy");
         this.getProxy().getScheduler().schedule(this, this::save, 1, 1, TimeUnit.HOURS);
+        this.getProxy().getPluginManager().registerCommand(this, new ReloadCommand());
         try {
             this.loadData();
         } catch (IOException e) {
@@ -38,10 +38,10 @@ public final class GarlicBungee extends Plugin implements Listener {
         this.save();
     }
 
-    private void loadData() throws IOException {
+    synchronized void loadData() throws IOException {
         Files.createDirectories(this.getDataFolder().toPath());
+        ServerGroup.instance().reload();
         this.data = new File(this.getDataFolder(), "data.yml").toPath();
-        this.dataOld = new File(this.getDataFolder(), "data_old.yml").toPath();
         if (Files.exists(this.data)) {
             this.playerData.load(this.data);
         }
@@ -49,7 +49,6 @@ public final class GarlicBungee extends Plugin implements Listener {
 
     private synchronized void save() {
         try {
-            Files.move(this.data, this.dataOld, StandardCopyOption.REPLACE_EXISTING);
             this.playerData.save(this.data);
         } catch (IOException e) {
             this.getLogger().severe("Error saving data");
@@ -78,7 +77,9 @@ public final class GarlicBungee extends Plugin implements Listener {
     public void onJoin(ServerSwitchEvent event) {
         var server = event.getPlayer().getServer();
         var uuid = event.getPlayer().getUniqueId();
-        var list = getPlayerData().getAll(uuid);
-        Registry.instance().send(new SetFlames(uuid, list), server.getInfo());
+        var list = getPlayerData().getAll(server.getInfo(), uuid);
+        if (list != null) {
+            Registry.instance().send(new SetFlames(uuid, list), server.getInfo());
+        }
     }
 }

@@ -18,7 +18,7 @@ public record AddFlame(UUID uuid, String namespace) implements Packet {
     public void handle(Server sender) {
         var plugin = (GarlicBungee) ProxyServer.getInstance().getPluginManager().getPlugin("noCaeT");
         var playerData = plugin.getPlayerData();
-        playerData.add(uuid, namespace);
+        playerData.add(sender.getInfo(), uuid, namespace);
         plugin.getLogger().info("" + uuid + " claimed " + namespace);
         // todo calculate progress and broadcast
     }

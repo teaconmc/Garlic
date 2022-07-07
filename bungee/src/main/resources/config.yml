@@ -1,0 +1,9 @@
+groups:
+  - pattern: 'build.*'
+    group: 'build'
+  - pattern: 'prod.*'
+    group: 'prod'
+  - pattern: '.*'
+    group: 'default'
+# default: null
+default: 'default'

@@ -11,11 +11,13 @@ import com.google.gson.JsonParseException;
 import com.google.gson.JsonParser;
 import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
+import net.md_5.bungee.api.config.ServerInfo;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
 import java.nio.file.StandardOpenOption;
 import java.time.Instant;
 import java.util.Collections;
@@ -31,32 +33,50 @@ public class PlayerData {
     private static final Gson GSON = new GsonBuilder()
         .registerTypeAdapter(Claim.class, new Claim.Serializer()).disableHtmlEscaping().setPrettyPrinting().create();
 
-    private final Map<UUID, Set<Claim>> map = new ConcurrentHashMap<>();
+    private final Map<String, Map<UUID, Set<Claim>>> map = new ConcurrentHashMap<>();
 
-    public void add(UUID uuid, String name) {
-        map.computeIfAbsent(uuid, k -> Collections.newSetFromMap(new ConcurrentHashMap<>())).add(new Claim(name, Instant.now()));
+    public void add(ServerInfo info, UUID uuid, String name) {
+        var group = ServerGroup.instance().getGroup(info);
+        if (group != null) {
+            var map = this.map.computeIfAbsent(group, k -> new ConcurrentHashMap<>());
+            map.computeIfAbsent(uuid, k -> Collections.newSetFromMap(new ConcurrentHashMap<>())).add(new Claim(name, Instant.now()));
+        }
     }
 
-    public List<String> getAll(UUID uuid) {
-        var set = map.get(uuid);
-        return set == null ? Collections.emptyList() : set.stream().map(Claim::name).toList();
+    public List<String> getAll(ServerInfo info, UUID uuid) {
+        var group = ServerGroup.instance().getGroup(info);
+        if (group != null) {
+            var map = this.map.computeIfAbsent(group, k -> new ConcurrentHashMap<>());
+            var set = map.get(uuid);
+            return set == null ? null : set.stream().map(Claim::name).toList();
+        } else return null;
     }
 
     @SuppressWarnings("UnstableApiUsage")
     public void load(Path path) throws IOException {
-        try (var reader = Files.newBufferedReader(path)) {
-            var obj = JsonParser.parseReader(reader).getAsJsonObject();
-            for (String s : obj.keySet()) {
-                var set = Collections.<Claim>newSetFromMap(new ConcurrentHashMap<>());
-                map.put(UUID.fromString(s), set);
-                set.addAll(GSON.fromJson(obj.get(s), new TypeToken<List<Claim>>() {}.getType()));
+        this.map.clear();
+        for (var group : ServerGroup.instance().getGroups()) {
+            try (var reader = Files.newBufferedReader(path.resolveSibling("data_" + group + ".yml"))) {
+                var map = this.map.computeIfAbsent(group, k -> new ConcurrentHashMap<>());
+                var obj = JsonParser.parseReader(reader).getAsJsonObject();
+                for (var s : obj.keySet()) {
+                    var set = Collections.<Claim>newSetFromMap(new ConcurrentHashMap<>());
+                    map.put(UUID.fromString(s), set);
+                    set.addAll(GSON.fromJson(obj.get(s), new TypeToken<List<Claim>>() {}.getType()));
+                }
             }
         }
     }
 
     public void save(Path path) throws IOException {
-        var s = GSON.toJson(map.entrySet().stream().collect(Collectors.toMap(it -> it.getKey().toString(), Map.Entry::getValue)));
-        Files.writeString(path, s, StandardOpenOption.CREATE, StandardOpenOption.WRITE);
+        for (var group : this.map.keySet()) {
+            var map = this.map.get(group);
+            var s = GSON.toJson(map.entrySet().stream().collect(Collectors.toMap(it -> it.getKey().toString(), Map.Entry::getValue)));
+            var oldData = path.resolveSibling("data_" + group + "_old.yml");
+            var newData = path.resolveSibling("data_" + group + ".yml");
+            Files.move(newData, oldData, StandardCopyOption.REPLACE_EXISTING);
+            Files.writeString(newData, s, StandardOpenOption.CREATE, StandardOpenOption.WRITE);
+        }
     }
 
     private record Claim(String name, Instant instant) {
