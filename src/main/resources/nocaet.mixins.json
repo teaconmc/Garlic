@@ -4,11 +4,13 @@
   "package": "org.teacon.nocaet.mixin",
   "compatibilityLevel": "JAVA_8",
   "refmap": "nocaet.refmap.json",
+  "plugin": "org.teacon.nocaet.GarlicMixinPlugin",
   "mixins": [
   ],
   "client": [
     "LevelRendererMixin",
-    "RenderTypeMixin"
+    "RenderTypeMixin",
+    "OptifineMixin"
   ],
   "injectors": {
     "defaultRequire": 1

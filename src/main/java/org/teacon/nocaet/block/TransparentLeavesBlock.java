@@ -10,6 +10,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
+@SuppressWarnings("deprecation")
 public class TransparentLeavesBlock extends Block {
 
     public TransparentLeavesBlock(Properties properties) {
