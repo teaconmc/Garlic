@@ -23,6 +23,7 @@ public final class GarlicBungee extends Plugin implements Listener {
     @Override
     public void onEnable() {
         this.getProxy().registerChannel("nocaet:proxy");
+        this.getProxy().getPluginManager().registerListener(this, this);
         this.getProxy().getScheduler().schedule(this, this::save, 1, 1, TimeUnit.HOURS);
         this.getProxy().getPluginManager().registerCommand(this, new ReloadCommand());
         try {
