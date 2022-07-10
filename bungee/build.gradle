@@ -12,8 +12,10 @@ dependencies {
     compileOnly 'net.md-5:bungeecord-api:1.18-R0.1-SNAPSHOT'
 }
 
+def identifier = System.env.VERSION_IDENTIFIER
+
 group = 'org.teacon'
-version = '1.0-SNAPSHOT'
+version = '1.0.0' + (identifier ? '-' + identifier : '')
 archivesBaseName = 'Garlic-Bungee-1.18'
 
 java {
@@ -35,9 +37,8 @@ tasks.register('githubActionOutput') {
         System.env.GITHUB_ACTIONS
     }
     doLast {
-        def identifier = System.env.VERSION_IDENTIFIER
         println "::set-output name=artifact_name::${jar.archiveFileName.get()}"
-        println "::set-output name=artifact_publish_name::${archivesBaseName}-${version}${identifier ? '-' + identifier : ''}.jar"
+        println "::set-output name=artifact_publish_name::${archivesBaseName}-${version}.jar"
         println "::set-output name=artifact_path::${jar.archiveFile.get().asFile.absolutePath}"
     }
 }
