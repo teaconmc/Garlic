@@ -12,6 +12,10 @@ dependencies {
     compileOnly 'net.md-5:bungeecord-api:1.18-R0.1-SNAPSHOT'
 }
 
+group = 'org.teacon'
+version = '1.0-SNAPSHOT'
+archivesBaseName = 'Garlic-Bungee-1.18'
+
 java {
     toolchain.languageVersion = JavaLanguageVersion.of(17)
 }
@@ -23,5 +27,17 @@ processResources {
     filteringCharset 'UTF-8'
     filesMatching('bungee.yml') {
         expand props
+    }
+}
+
+tasks.register('githubActionOutput') {
+    onlyIf {
+        System.env.GITHUB_ACTIONS
+    }
+    doLast {
+        def identifier = System.env.VERSION_IDENTIFIER
+        println "::set-output name=artifact_name::${jar.archiveFileName.get()}"
+        println "::set-output name=artifact_publish_name::${archivesBaseName}-${version}${identifier ? '-' + identifier : ''}.jar"
+        println "::set-output name=artifact_path::${jar.archiveFile.get().asFile.absolutePath}"
     }
 }
