@@ -1,5 +1,6 @@
 package org.teacon.nocaet.mixin;
 
+import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Matrix4f;
 import net.minecraft.client.Camera;
@@ -7,12 +8,10 @@ import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.client.renderer.LevelRenderer;
 import net.minecraft.client.renderer.LightTexture;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.ShaderInstance;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.ModifyArg;
 import org.spongepowered.asm.mixin.injection.Slice;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.teacon.nocaet.client.GarlicRenderTypes;
@@ -38,12 +37,16 @@ public abstract class LevelRendererMixin {
         this.renderChunkLayer(GarlicRenderTypes.CUTOUT, pPoseStack, pos.x(), pos.y(), pos.z(), pProjectionMatrix);
     }
 
-    @ModifyArg(method = "renderChunkLayer", index = 0, at = @At(value = "INVOKE", target = "Lcom/mojang/blaze3d/systems/RenderSystem;setupShaderLights(Lnet/minecraft/client/renderer/ShaderInstance;)V"))
-    private ShaderInstance setProgress(ShaderInstance instance) {
+    @Inject(method = "renderChunkLayer", at = @At(value = "INVOKE", target = "Lcom/mojang/blaze3d/systems/RenderSystem;setupShaderLights(Lnet/minecraft/client/renderer/ShaderInstance;)V"))
+    private void setProgress(RenderType pRenderType, PoseStack pPoseStack, double pCamX, double pCamY, double pCamZ, Matrix4f pProjectionMatrix, CallbackInfo ci) {
+        var instance = RenderSystem.getShader();
         var progress = instance.getUniform("nocaetProgress");
         if (progress != null) {
             progress.set(GarlicShaders.getProgress());
         }
-        return instance;
+        var cameraPos = instance.getUniform("nocaetCamPos");
+        if (cameraPos != null) {
+            cameraPos.set((float) pCamX, (float) pCamY, (float) pCamZ);
+        }
     }
 }

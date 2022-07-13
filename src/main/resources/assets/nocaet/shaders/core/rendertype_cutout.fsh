@@ -19,10 +19,6 @@ in float nocaetNoise;
 
 out vec4 fragColor;
 
-float mod6(float num) {
-    return num - floor(num * (1.0 / 6.0)) * 6.0;
-}
-
 /* https://stackoverflow.com/a/17897228 Licensed under WTFPL */
 vec3 hsv2rgb(vec3 c)
 {

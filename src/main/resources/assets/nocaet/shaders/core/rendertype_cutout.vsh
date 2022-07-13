@@ -13,6 +13,7 @@ uniform mat4 ModelViewMat;
 uniform mat4 ProjMat;
 uniform vec3 ChunkOffset;
 uniform int FogShape;
+uniform vec3 nocaetCamPos;
 
 out float vertexDistance;
 out vec4 vertexColor;
@@ -142,5 +143,5 @@ void main() {
     vertexColor = Color;
     texCoord0 = UV0;
     normal = ProjMat * ModelViewMat * vec4(Normal, 0.0);
-    nocaetNoise = frac_noise(pos / 50.0);
+    nocaetNoise = frac_noise((pos + nocaetCamPos) / 50.0);
 }

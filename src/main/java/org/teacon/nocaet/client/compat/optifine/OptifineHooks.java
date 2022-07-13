@@ -11,6 +11,7 @@ public class OptifineHooks {
 
     private static final Pattern PATTERN_VERSION = Pattern.compile("^\\s*#version\\s+(\\d+).*$", Pattern.MULTILINE | Pattern.UNIX_LINES);
     private static final Pattern PATTERN_FRAME_TIME = Pattern.compile("uniform\\s+float\\s+frameTimeCounter\\s*;", Pattern.MULTILINE | Pattern.UNIX_LINES);
+    private static final Pattern PATTERN_CAM_POS = Pattern.compile("uniform\\s+vec3\\s+cameraPosition\\s*;", Pattern.MULTILINE | Pattern.UNIX_LINES);
 
     public static float getProgress() {
         return GarlicShaders.getProgress();
@@ -28,6 +29,9 @@ public class OptifineHooks {
                 var end = matcher.end();
                 if (isVert && !text.contains("mc_Entity")) {
                     insertion.append("\nin vec3 mc_Entity;");
+                }
+                if (isVert && !PATTERN_CAM_POS.matcher(text).find()) {
+                    insertion.append("\nuniform vec3 cameraPosition;");
                 }
                 if (isFrag && !PATTERN_FRAME_TIME.matcher(text).find()) {
                     insertion.append("\nuniform float frameTimeCounter;");
@@ -188,7 +192,7 @@ public class OptifineHooks {
         void main() {
             nocaet_main(); // original main
             if (mc_Entity.x == 10990) { // nocaet blocks magic number
-            	nocaetNoise = nocaet_frac_noise(gl_Vertex.xyz / 50.0);
+            	nocaetNoise = nocaet_frac_noise((gl_Vertex.xyz + cameraPosition) / 50.0);
             } else {
             	nocaetNoise = -200.0;
             }
