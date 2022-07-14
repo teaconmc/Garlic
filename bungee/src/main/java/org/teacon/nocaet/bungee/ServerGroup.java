@@ -67,4 +67,13 @@ public class ServerGroup {
             return Collections.emptyList();
         }
     }
+
+    public Collection<ServerInfo> getServers(ServerInfo server) {
+        var s = getGroup(server);
+        if (s != null) {
+            return groupToServer.get(s).stream().map(ProxyServer.getInstance()::getServerInfo).toList();
+        } else {
+            return Collections.emptyList();
+        }
+    }
 }

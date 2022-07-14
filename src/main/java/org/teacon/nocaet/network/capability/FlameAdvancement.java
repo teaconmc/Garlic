@@ -31,6 +31,14 @@ public class FlameAdvancement {
         return list;
     }
 
+    public boolean add(ResourceLocation rl) {
+        if (list.contains(rl)) {
+            return false;
+        } else {
+            return list.add(rl);
+        }
+    }
+
     static class Provider implements ICapabilityProvider {
 
         static final Capability<FlameAdvancement> CAPABILITY = CapabilityManager.get(new CapabilityToken<>() {});

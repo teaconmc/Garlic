@@ -2,6 +2,7 @@ package org.teacon.nocaet;
 
 import com.mojang.logging.LogUtils;
 import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
@@ -26,5 +27,6 @@ public class GarlicMod {
         GarlicCapability.init();
         FMLJavaModLoadingContext.get().getModEventBus().addListener(GarlicData::register);
         DistExecutor.safeRunWhenOn(Dist.CLIENT, () -> GarlicClient::init);
+        MinecraftForge.EVENT_BUS.register(new GarlicEvents());
     }
 }
