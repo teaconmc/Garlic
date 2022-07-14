@@ -9,6 +9,7 @@ import net.minecraftforge.client.event.ColorHandlerEvent;
 import net.minecraftforge.client.event.RegisterShadersEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
+import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.RegistryObject;
@@ -22,7 +23,7 @@ public class GarlicClient {
         FMLJavaModLoadingContext.get().getModEventBus().addListener(GarlicClient::clientSetup);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(GarlicClient::blockColor);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(GarlicClient::registerShader);
-        MinecraftForge.EVENT_BUS.addListener(GarlicClient::addTooltip);
+        MinecraftForge.EVENT_BUS.addListener(EventPriority.LOW, GarlicClient::addTooltip);
     }
 
     private static void registerShader(RegisterShadersEvent event) {
@@ -54,7 +55,7 @@ public class GarlicClient {
 
     private static void addTooltip(ItemTooltipEvent event) {
         var stack = event.getItemStack();
-        if (GarlicRegistry.isFlameItem(stack.getItem())) {
+        if (stack.is(GarlicRegistry.FLAME_TAG)) {
             event.getToolTip().add(new TextComponent(""));
             event.getToolTip().add(new TranslatableComponent("nocaet.flame.tooltip"));
         }
