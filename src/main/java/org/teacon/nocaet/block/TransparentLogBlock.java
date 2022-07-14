@@ -11,7 +11,12 @@ import javax.annotation.ParametersAreNonnullByDefault;
 public class TransparentLogBlock extends RotatedPillarBlock {
 
     public TransparentLogBlock(Properties properties) {
-        super(properties.noOcclusion().isSuffocating((a, b, c) -> false).isViewBlocking((a, b, c) -> false));
+        super(properties.isSuffocating((a, b, c) -> false));
+    }
+
+    @Override
+    public int getLightBlock(BlockState pState, BlockGetter pLevel, BlockPos pPos) {
+        return 0;
     }
 
     @Override
