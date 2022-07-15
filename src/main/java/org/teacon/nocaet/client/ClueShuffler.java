@@ -32,7 +32,7 @@ public class ClueShuffler {
         }
     }
 
-    private void shuffle() {
+    void shuffle() {
         this.index = 0;
         this.queue.clear();
         var player = Minecraft.getInstance().player;

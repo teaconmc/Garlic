@@ -6,6 +6,7 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.network.NetworkEvent;
 import net.minecraftforge.registries.ForgeRegistries;
+import org.teacon.nocaet.client.GarlicClient;
 import org.teacon.nocaet.network.capability.GarlicCapability;
 
 import java.util.Arrays;
@@ -36,6 +37,7 @@ public record SyncFlamesPacket(int[] items) {
                     var list = Arrays.stream(items).mapToObj(it -> Registry.ITEM.byId(it).getRegistryName()).toList();
                     adv.getGranted().clear();
                     adv.getGranted().addAll(list);
+                    GarlicClient.refreshClues();
                 });
             }
         });

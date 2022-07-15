@@ -43,6 +43,10 @@ public class GarlicClient {
         EXECUTOR.scheduleAtFixedRate(() -> Minecraft.getInstance().execute(CLUES::next), 10, 10, TimeUnit.MINUTES);
     }
 
+    public static void refreshClues() {
+        CLUES.shuffle();
+    }
+
     private static void registerShader(RegisterShadersEvent event) {
         try {
             GarlicShaders.register(event);

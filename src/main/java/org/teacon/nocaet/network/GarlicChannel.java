@@ -1,10 +1,13 @@
 package org.teacon.nocaet.network;
 
 import net.minecraft.resources.ResourceLocation;
+import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.fml.loading.FMLEnvironment;
 import net.minecraftforge.network.NetworkDirection;
 import net.minecraftforge.network.NetworkRegistry;
+import net.minecraftforge.network.PacketDistributor;
 import net.minecraftforge.network.simple.SimpleChannel;
 import org.teacon.nocaet.GarlicMod;
 import org.teacon.nocaet.network.play.SetProgressPacket;
@@ -45,5 +48,12 @@ public class GarlicChannel {
 
     public static SimpleChannel getProxyChannel() {
         return proxyChannel;
+    }
+
+    public static <MSG> void sendProxy(PacketDistributor.PacketTarget target, MSG message) {
+        // sync only on dedicated servers
+        if (FMLEnvironment.dist == Dist.DEDICATED_SERVER) {
+            proxyChannel.send(target, message);
+        }
     }
 }
