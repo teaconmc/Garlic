@@ -3,8 +3,11 @@ package org.teacon.nocaet.network.proxy;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.network.NetworkEvent;
+import net.minecraftforge.network.PacketDistributor;
 import net.minecraftforge.server.ServerLifecycleHooks;
+import org.teacon.nocaet.network.GarlicChannel;
 import org.teacon.nocaet.network.capability.GarlicCapability;
+import org.teacon.nocaet.network.play.SyncFlamesPacket;
 
 import java.util.List;
 import java.util.UUID;
@@ -25,9 +28,10 @@ public record SetFlamesPacket(UUID uuid, List<ResourceLocation> flames) {
         ctx.get().enqueueWork(() -> {
             var player = ServerLifecycleHooks.getCurrentServer().getPlayerList().getPlayer(uuid);
             if (player != null) {
-                player.getCapability(GarlicCapability.flames()).resolve().ifPresent(adv -> {
-                    adv.getList().clear();
-                    adv.getList().addAll(flames);
+                player.getCapability(GarlicCapability.flames()).ifPresent(adv -> {
+                    adv.getGranted().clear();
+                    adv.getGranted().addAll(flames);
+                    GarlicChannel.getChannel().send(PacketDistributor.PLAYER.with(() -> player), new SyncFlamesPacket(adv.getGranted()));
                 });
             }
         });

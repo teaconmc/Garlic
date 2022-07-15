@@ -8,8 +8,11 @@
   "block.nocaet.log_strip": "Log Strip",
   "block.nocaet.log_strip_light": "Lighted Log Strip",
   "block.nocaet.log_strip_shadow": "Shadowed Log Strip",
+  "item.nocaet.elder_scroll": "Ancient Scroll",
   "itemGroup.nocaet": "noCaeT",
   "nocaet.command.progress": "Set progress to %s",
   "nocaet.flame.tooltip": "TeaCon 2022 Collections",
-  "nocaet.flame.grant": "O! %1$s hath receiv'd the %2$s, now the Tree burnes stronger"
+  "nocaet.flame.grant": "O! %1$s hath receiv'd the %2$s, now the Tree burnes stronger",
+  "nocaet.scroll.tooltip.clue": "The Scroll guides the the Fire Keeper\nwith words on it...",
+  "nocaet.scroll.tooltip.empty": "The Scroll guides the the Fire Keeper\n...but the power is gone."
 }

@@ -1,7 +1,7 @@
 package org.teacon.nocaet.network.capability;
 
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.capabilities.Capability;
@@ -25,7 +25,7 @@ public class GarlicCapability {
     }
 
     private static void attachPlayer(AttachCapabilitiesEvent<Entity> event) {
-        if (event.getObject() instanceof ServerPlayer) {
+        if (event.getObject() instanceof Player) {
             event.addCapability(FlameAdvancement.ID, new FlameAdvancement.Provider());
         }
     }
@@ -34,8 +34,8 @@ public class GarlicCapability {
         if (event.isWasDeath()) {
             event.getOriginal().getCapability(flames()).ifPresent(old -> {
                 event.getEntity().getCapability(flames()).ifPresent(it -> {
-                    it.getList().clear();
-                    it.getList().addAll(old.getList());
+                    it.getGranted().clear();
+                    it.getGranted().addAll(old.getGranted());
                 });
             });
         }

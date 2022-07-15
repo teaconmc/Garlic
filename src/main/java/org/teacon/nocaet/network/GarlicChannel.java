@@ -8,6 +8,7 @@ import net.minecraftforge.network.NetworkRegistry;
 import net.minecraftforge.network.simple.SimpleChannel;
 import org.teacon.nocaet.GarlicMod;
 import org.teacon.nocaet.network.play.SetProgressPacket;
+import org.teacon.nocaet.network.play.SyncFlamesPacket;
 import org.teacon.nocaet.network.proxy.AddFlamePacket;
 import org.teacon.nocaet.network.proxy.SetFlamesPacket;
 import org.teacon.nocaet.network.proxy.SyncProgressPacket;
@@ -26,6 +27,8 @@ public class GarlicChannel {
         channel = NetworkRegistry.newSimpleChannel(new ResourceLocation(GarlicMod.MODID, "ch"), () -> "1", "1"::equals, "1"::equals);
         channel.registerMessage(0, SetProgressPacket.class, SetProgressPacket::write, SetProgressPacket::new,
             SetProgressPacket::handle, Optional.of(NetworkDirection.PLAY_TO_CLIENT));
+        channel.registerMessage(1, SyncFlamesPacket.class, SyncFlamesPacket::write, SyncFlamesPacket::new,
+            SyncFlamesPacket::handle, Optional.of(NetworkDirection.PLAY_TO_CLIENT));
         proxyChannel = NetworkRegistry.newSimpleChannel(new ResourceLocation(GarlicMod.MODID, "proxy"), () -> "1",
             NetworkRegistry.acceptMissingOr("1"::equals), NetworkRegistry.acceptMissingOr("1"::equals));
         proxyChannel.registerMessage(0, SyncProgressPacket.class, SyncProgressPacket::write, SyncProgressPacket::new,

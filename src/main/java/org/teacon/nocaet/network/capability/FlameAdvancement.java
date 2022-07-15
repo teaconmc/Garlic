@@ -12,22 +12,24 @@ import org.jetbrains.annotations.Nullable;
 import org.teacon.nocaet.GarlicMod;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
 public class FlameAdvancement {
 
     static final ResourceLocation ID = new ResourceLocation(GarlicMod.MODID, "progress");
-    private final List<ResourceLocation> list;
+    private final Set<ResourceLocation> list;
 
     public FlameAdvancement() {
         this(new ArrayList<>());
     }
 
-    public FlameAdvancement(List<ResourceLocation> list) {
-        this.list = list;
+    public FlameAdvancement(Collection<ResourceLocation> list) {
+        this.list = new HashSet<>(list);
     }
 
-    public List<ResourceLocation> getList() {
+    public Set<ResourceLocation> getGranted() {
         return list;
     }
 
@@ -37,6 +39,10 @@ public class FlameAdvancement {
         } else {
             return list.add(rl);
         }
+    }
+
+    public boolean contains(ResourceLocation rl) {
+        return this.list.contains(rl);
     }
 
     static class Provider implements ICapabilityProvider {

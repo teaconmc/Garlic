@@ -11,6 +11,7 @@ import net.minecraftforge.network.PacketDistributor;
 import org.teacon.nocaet.network.GarlicChannel;
 import org.teacon.nocaet.network.capability.FlameAdvancement;
 import org.teacon.nocaet.network.capability.GarlicCapability;
+import org.teacon.nocaet.network.play.SyncFlamesPacket;
 import org.teacon.nocaet.network.proxy.AddFlamePacket;
 
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -39,13 +40,17 @@ public class GarlicEvents {
                 public void dataChanged(AbstractContainerMenu pContainerMenu, int pDataSlotIndex, int pValue) {
                 }
             });
+            player.getCapability(GarlicCapability.flames()).ifPresent(it ->
+                GarlicChannel.getChannel().send(PacketDistributor.PLAYER.with(() -> player), new SyncFlamesPacket(it.getGranted()))
+            );
         }
     }
 
     private void grantAndBroadcast(ServerPlayer player, FlameAdvancement advancement, ItemStack stack) {
-        if (!advancement.add(stack.getItem().getRegistryName())) {
+        if (advancement.add(stack.getItem().getRegistryName())) {
             GarlicChannel.getProxyChannel().send(PacketDistributor.PLAYER.with(() -> player),
                 new AddFlamePacket(player.getUUID(), stack.getItem().getRegistryName(), stack.getDisplayName()));
+            GarlicChannel.getChannel().send(PacketDistributor.PLAYER.with(() -> player), new SyncFlamesPacket(advancement.getGranted()));
         }
     }
 }

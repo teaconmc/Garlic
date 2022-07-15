@@ -15,6 +15,7 @@ import net.minecraft.world.level.material.Material;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.RegistryObject;
 import org.jetbrains.annotations.NotNull;
 import org.teacon.nocaet.block.TransparentLeavesBlock;
 import org.teacon.nocaet.block.TransparentLogBlock;
@@ -35,12 +36,21 @@ public class GarlicRegistry {
         }
     };
 
+    public static RegistryObject<Item> SCROLL_ITEM;
+
     private static <T extends Block> void itemBlock(String name, Supplier<T> block) {
         var object = BLOCKS.register(name, block);
         ITEMS.register(name, () -> new BlockItem(object.get(), new Item.Properties().tab(TAB)));
     }
 
-    static {
+    public static void register() {
+        BLOCKS.register(FMLJavaModLoadingContext.get().getModEventBus());
+        ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());
+        registerBuiltin();
+        registerFlames();
+    }
+
+    private static void registerBuiltin() {
         for (var block : List.of("log", "log_strip")) {
             itemBlock(block, () -> new TransparentLogBlock(
                 BlockBehaviour.Properties.of(Material.WOOD).strength(2.5F).sound(SoundType.WOOD)
@@ -65,10 +75,9 @@ public class GarlicRegistry {
             BlockBehaviour.Properties.of(Material.LEAVES).strength(0.2F).sound(SoundType.GRASS).noOcclusion()
                 .isValidSpawn((a, b, c, d) -> false).lightLevel(s -> 15).emissiveRendering((a, b, c) -> true)
         ));
+        SCROLL_ITEM = ITEMS.register("elder_scroll", () -> new Item(new Item.Properties().tab(TAB)));
     }
 
-    public static void register() {
-        BLOCKS.register(FMLJavaModLoadingContext.get().getModEventBus());
-        ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());
+    private static void registerFlames() {
     }
 }

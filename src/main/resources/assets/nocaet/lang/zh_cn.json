@@ -8,8 +8,11 @@
   "block.nocaet.log_strip": "去皮原木",
   "block.nocaet.log_strip_light": "发光去皮原木",
   "block.nocaet.log_strip_shadow": "阴影去皮原木",
+  "item.nocaet.elder_scroll": "古老卷轴",
   "itemGroup.nocaet": "noCaeT",
   "nocaet.command.progress": "进度设置为 %s",
   "nocaet.flame.tooltip": "TeaCon 2022 藏品",
-  "nocaet.flame.grant": "%1$s 点燃了 %2$s, 因而大树倍加炽热"
+  "nocaet.flame.grant": "%1$s 点燃了 %2$s, 因而大树倍加炽热",
+  "nocaet.scroll.tooltip.clue": "指引传火者的古老卷轴\n几行文字浮现——",
+  "nocaet.scroll.tooltip.empty": "指引传火者的古老卷轴\n...已经感觉不到力量"
 }
