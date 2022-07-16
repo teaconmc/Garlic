@@ -27,14 +27,14 @@ public abstract class LevelRendererMixin {
         slice = @Slice(from = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/RenderType;solid()Lnet/minecraft/client/renderer/RenderType;")))
     private void drawSolidLayer(PoseStack pPoseStack, float pPartialTick, long pFinishNanoTime, boolean pRenderBlockOutline, Camera pCamera, GameRenderer pGameRenderer, LightTexture pLightTexture, Matrix4f pProjectionMatrix, CallbackInfo ci) {
         var pos = pCamera.getPosition();
-        this.renderChunkLayer(GarlicRenderTypes.SOLID, pPoseStack, pos.x(), pos.y(), pos.z(), pProjectionMatrix);
+        this.renderChunkLayer(GarlicRenderTypes.GARLIC_SOLID, pPoseStack, pos.x(), pos.y(), pos.z(), pProjectionMatrix);
     }
 
     @Inject(method = "renderLevel", at = @At(value = "INVOKE", shift = At.Shift.AFTER, target = "Lnet/minecraft/client/renderer/LevelRenderer;renderChunkLayer(Lnet/minecraft/client/renderer/RenderType;Lcom/mojang/blaze3d/vertex/PoseStack;DDDLcom/mojang/math/Matrix4f;)V", ordinal = 0),
         slice = @Slice(from = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/RenderType;cutout()Lnet/minecraft/client/renderer/RenderType;")))
     private void drawCutoutLayer(PoseStack pPoseStack, float pPartialTick, long pFinishNanoTime, boolean pRenderBlockOutline, Camera pCamera, GameRenderer pGameRenderer, LightTexture pLightTexture, Matrix4f pProjectionMatrix, CallbackInfo ci) {
         var pos = pCamera.getPosition();
-        this.renderChunkLayer(GarlicRenderTypes.CUTOUT, pPoseStack, pos.x(), pos.y(), pos.z(), pProjectionMatrix);
+        this.renderChunkLayer(GarlicRenderTypes.GARLIC_CUTOUT, pPoseStack, pos.x(), pos.y(), pos.z(), pProjectionMatrix);
     }
 
     @Inject(method = "renderChunkLayer", at = @At(value = "INVOKE", target = "Lcom/mojang/blaze3d/systems/RenderSystem;setupShaderLights(Lnet/minecraft/client/renderer/ShaderInstance;)V"))

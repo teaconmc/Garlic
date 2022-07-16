@@ -11,14 +11,14 @@ public class GarlicRenderTypes extends RenderType {
         throw new AssertionError();
     }
 
-    public static final RenderType SOLID = RenderType.create(
+    public static final RenderType GARLIC_SOLID = RenderType.create(
         "solid_nocaet", DefaultVertexFormat.BLOCK, VertexFormat.Mode.QUADS, 2097152,
         true, false, RenderType.CompositeState.builder()
             .setLightmapState(LIGHTMAP).setShaderState(GarlicShaders.SOLID_STATE)
             .setTextureState(BLOCK_SHEET_MIPPED).createCompositeState(true)
     );
 
-    public static final RenderType CUTOUT = RenderType.create(
+    public static final RenderType GARLIC_CUTOUT = RenderType.create(
         "cutout_nocaet", DefaultVertexFormat.BLOCK, VertexFormat.Mode.QUADS, 2097152,
         true, false, RenderType.CompositeState.builder()
             .setLightmapState(NO_LIGHTMAP).setShaderState(GarlicShaders.CUTOUT_STATE)

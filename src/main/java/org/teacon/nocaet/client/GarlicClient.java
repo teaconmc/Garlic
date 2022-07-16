@@ -58,9 +58,9 @@ public class GarlicClient {
     private static void clientSetup(FMLClientSetupEvent event) {
         for (RegistryObject<Block> object : GarlicRegistry.BLOCKS.getEntries()) {
             if (object.get().getRegistryName().getPath().contains("leaves")) {
-                ItemBlockRenderTypes.setRenderLayer(object.get(), GarlicRenderTypes.CUTOUT);
+                ItemBlockRenderTypes.setRenderLayer(object.get(), GarlicRenderTypes.GARLIC_CUTOUT);
             } else {
-                ItemBlockRenderTypes.setRenderLayer(object.get(), GarlicRenderTypes.SOLID);
+                ItemBlockRenderTypes.setRenderLayer(object.get(), GarlicRenderTypes.GARLIC_SOLID);
             }
         }
     }

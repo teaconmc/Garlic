@@ -18,7 +18,7 @@ public class RenderTypeMixin {
         cir.setReturnValue(
             ImmutableList.<RenderType>builder()
                 .addAll(cir.getReturnValue())
-                .add(GarlicRenderTypes.SOLID, GarlicRenderTypes.CUTOUT)
+                .add(GarlicRenderTypes.GARLIC_SOLID, GarlicRenderTypes.GARLIC_CUTOUT)
                 .build()
         );
     }
