@@ -84,6 +84,8 @@
 * （可选）描述文本
 * （可选）线索文本
 
+如果不想提供英文翻译，可直接将中文文本提交至 `en_us.json`。
+
 可参考[示例 Pull Request](https://github.com/teaconmc/Garlic/pull/1)。
 
 如果需要文案风格、贴图或其他方面的帮助，可以一并在 PR 内写出。
