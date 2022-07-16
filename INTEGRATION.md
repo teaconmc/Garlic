@@ -20,6 +20,8 @@
 前往初始之地寻求火焰吧。
 ```
 
+描述与线索均显示在物品的 Tooltip 上，因此请合理换行以控制一行最大长度。具体来说，最好控制在一行 20 个汉字以下。
+
 你有两种方式进行集成。
 
 ## 模组中集成
@@ -82,6 +84,6 @@
 * （可选）描述文本
 * （可选）线索文本
 
-可参考[示例 Pull Request](https://github.com/teaconmc/Garlic/pulls/1)。
+可参考[示例 Pull Request](https://github.com/teaconmc/Garlic/pull/1)。
 
 如果需要文案风格、贴图或其他方面的帮助，可以一并在 PR 内写出。
