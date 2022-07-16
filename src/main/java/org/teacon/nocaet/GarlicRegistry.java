@@ -7,6 +7,7 @@ import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Rarity;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.RotatedPillarBlock;
 import net.minecraft.world.level.block.SoundType;
@@ -79,5 +80,6 @@ public class GarlicRegistry {
     }
 
     private static void registerFlames() {
+        ITEMS.register("fading_flame", ()-> new Item(new Item.Properties().tab(TAB).rarity(Rarity.UNCOMMON)));
     }
 }
