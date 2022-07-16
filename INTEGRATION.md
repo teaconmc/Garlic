@@ -83,3 +83,5 @@
 * （可选）线索文本
 
 可参考[示例 Pull Request](https://github.com/teaconmc/Garlic/pulls/1)。
+
+如果需要文案风格、贴图或其他方面的帮助，可以一并在 PR 内写出。
