@@ -52,7 +52,10 @@ public class GarlicEvents {
                     pStack.getCapability(GarlicCapability.bind())
                         .filter(it -> it.bindTo(player))
                         .flatMap(it -> player.getCapability(GarlicCapability.flames()).resolve())
-                        .ifPresent(it -> grantAndBroadcast(player, it, pStack));
+                        .ifPresent(it -> {
+                            grantAndBroadcast(player, it, pStack);
+                            pContainerToSend.getSlot(pSlotInd).set(pStack);
+                        });
                 }
             }
         }

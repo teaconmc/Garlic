@@ -34,7 +34,7 @@ public class Bind {
     public void write(CompoundTag tag) {
         if (this.owner != null) {
             tag.putUUID("Owner", this.owner);
-            tag.putLong("Data", this.instant.toEpochMilli());
+            tag.putLong("Date", this.instant.toEpochMilli());
         }
     }
 

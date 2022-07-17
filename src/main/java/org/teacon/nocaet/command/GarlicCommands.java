@@ -15,8 +15,8 @@ import java.util.function.Predicate;
 
 public class GarlicCommands {
 
-    public static final PermissionNode<Boolean> OPEN_SELF = bool("open.self", 0);
-    public static final PermissionNode<Boolean> OPEN_OTHER = bool("open.other", 2);
+    public static final PermissionNode<Boolean> OPEN_SELF = bool("lookup.self", 0);
+    public static final PermissionNode<Boolean> OPEN_OTHER = bool("lookup.other", 2);
     public static final PermissionNode<Boolean> SEND_PROGRESS = bool("progress", 2);
 
     private static PermissionNode<Boolean> bool(String name, int level) {
@@ -31,7 +31,7 @@ public class GarlicCommands {
 
     private static void register(RegisterCommandsEvent event) {
         var builder = Commands.literal("nocaet");
-        OpenMenuCommand.register(builder);
+        LookupCommand.register(builder);
         SetProgressCommand.register(builder);
         event.getDispatcher().register(builder);
     }
