@@ -81,5 +81,6 @@ public class GarlicRegistry {
 
     private static void registerFlames() {
         ITEMS.register("fading_flame", ()-> new Item(new Item.Properties().tab(TAB).rarity(Rarity.UNCOMMON)));
+        ITEMS.register("atziluth", ()-> new Item(new Item.Properties().tab(TAB).rarity(Rarity.UNCOMMON)));
     }
 }
