@@ -68,6 +68,14 @@ public class GarlicRegistry {
             BlockBehaviour.Properties.of(Material.LEAVES).strength(0.2F).sound(SoundType.GRASS).noOcclusion()
                 .isValidSpawn((a, b, c, d) -> false)
         ));
+        itemBlock("leaves_large", () -> new TransparentLeavesBlock(
+            BlockBehaviour.Properties.of(Material.LEAVES).strength(0.2F).sound(SoundType.GRASS).noOcclusion()
+                .isValidSpawn((a, b, c, d) -> false)
+        ));
+        itemBlock("leaves_very_large", () -> new TransparentLeavesBlock(
+            BlockBehaviour.Properties.of(Material.LEAVES).strength(0.2F).sound(SoundType.GRASS).noOcclusion()
+                .isValidSpawn((a, b, c, d) -> false)
+        ));
         itemBlock("leaves_shadow", () -> new Block(
             BlockBehaviour.Properties.of(Material.LEAVES).strength(0.2F).sound(SoundType.GRASS).noOcclusion()
                 .isValidSpawn((a, b, c, d) -> false)

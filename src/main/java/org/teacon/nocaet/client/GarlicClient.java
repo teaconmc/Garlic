@@ -6,16 +6,20 @@ import net.minecraft.locale.Language;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.client.event.ColorHandlerEvent;
+import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.client.event.RegisterShadersEvent;
+import net.minecraftforge.client.model.ModelLoaderRegistry;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.RegistryObject;
+import org.teacon.nocaet.GarlicMod;
 import org.teacon.nocaet.GarlicRegistry;
 
 import java.io.IOException;
@@ -39,12 +43,17 @@ public class GarlicClient {
         FMLJavaModLoadingContext.get().getModEventBus().addListener(GarlicClient::clientSetup);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(GarlicClient::blockColor);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(GarlicClient::registerShader);
+        FMLJavaModLoadingContext.get().getModEventBus().addListener(GarlicClient::registerModelLoader);
         MinecraftForge.EVENT_BUS.addListener(EventPriority.LOW, GarlicClient::addTooltip);
         EXECUTOR.scheduleAtFixedRate(() -> Minecraft.getInstance().execute(CLUES::next), 10, 10, TimeUnit.MINUTES);
     }
 
     public static void refreshClues() {
         CLUES.shuffle();
+    }
+
+    private static void registerModelLoader(ModelRegistryEvent event) {
+        ModelLoaderRegistry.registerLoader(new ResourceLocation(GarlicMod.MODID, "garlic"), new LargeLeavesModelLoader());
     }
 
     private static void registerShader(RegisterShadersEvent event) {

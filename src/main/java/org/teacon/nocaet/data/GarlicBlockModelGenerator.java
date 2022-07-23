@@ -33,7 +33,7 @@ public class GarlicBlockModelGenerator extends BlockStateProvider {
         var wood = models("wood", 4);
         for (var entry : GarlicRegistry.BLOCKS.getEntries()) {
             var block = entry.get();
-            if (block.getRegistryName().getPath().contains("leaves")) {
+            if (block.getRegistryName().getPath().contains("leaves") && !block.getRegistryName().getPath().contains("large")) {
                 this.getVariantBuilder(block)
                     .partialState()
                     .addModels(leaves.stream()

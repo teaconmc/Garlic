@@ -1,5 +1,7 @@
 {
   "block.nocaet.leaves": "Leaves",
+  "block.nocaet.leaves_large": "Large Leaves",
+  "block.nocaet.leaves_very_large": "Very Large Leaves",
   "block.nocaet.leaves_light": "Lighted Leaves",
   "block.nocaet.leaves_shadow": "Shadowed Leaves",
   "block.nocaet.log": "Log",
