@@ -31,14 +31,12 @@ public class GarlicCapability {
     }
 
     private static void clonePlayer(PlayerEvent.Clone event) {
-        if (event.isWasDeath()) {
-            event.getOriginal().getCapability(flames()).ifPresent(old -> {
-                event.getEntity().getCapability(flames()).ifPresent(it -> {
-                    it.getGranted().clear();
-                    it.getGranted().addAll(old.getGranted());
-                });
+        event.getOriginal().getCapability(flames()).ifPresent(old -> {
+            event.getEntity().getCapability(flames()).ifPresent(it -> {
+                it.getGranted().clear();
+                it.getGranted().addAll(old.getGranted());
             });
-        }
+        });
     }
 
     private static void attackItem(AttachCapabilitiesEvent<ItemStack> event) {

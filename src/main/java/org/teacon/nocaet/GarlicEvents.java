@@ -1,6 +1,7 @@
 package org.teacon.nocaet;
 
 import net.minecraft.Util;
+import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.ChatType;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.server.level.ServerPlayer;
@@ -30,6 +31,10 @@ public class GarlicEvents {
             player.getCapability(GarlicCapability.flames()).ifPresent(it ->
                 GarlicChannel.getChannel().send(PacketDistributor.PLAYER.with(() -> player), new SyncFlamesPacket(it.getGranted()))
             );
+            if (!player.getPersistentData().contains("NocaetScroll", Tag.TAG_BYTE)) {
+                player.getPersistentData().putBoolean("NocaetScroll", true);
+                player.getInventory().add(new ItemStack(GarlicRegistry.SCROLL_ITEM.get()));
+            }
         }
     }
 
@@ -47,7 +52,8 @@ public class GarlicEvents {
 
         @Override
         public void slotChanged(AbstractContainerMenu pContainerToSend, int pSlotInd, ItemStack pStack) {
-            if (pContainerToSend == player.inventoryMenu && !(pContainerToSend.getSlot(pSlotInd) instanceof ResultSlot)) {
+            if (pContainerToSend == player.inventoryMenu && !(pContainerToSend.getSlot(pSlotInd) instanceof ResultSlot)
+                && player.gameMode.isSurvival()) {
                 if (pStack.is(GarlicRegistry.FLAME_TAG)) {
                     pStack.getCapability(GarlicCapability.bind())
                         .filter(it -> it.bindTo(player))
