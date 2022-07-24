@@ -10,6 +10,7 @@ import net.minecraft.world.inventory.ContainerListener;
 import net.minecraft.world.inventory.ResultSlot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
+import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.network.PacketDistributor;
 import net.minecraftforge.server.ServerLifecycleHooks;
@@ -35,6 +36,14 @@ public class GarlicEvents {
                 player.getPersistentData().putBoolean("NocaetScroll", true);
                 player.getInventory().add(new ItemStack(GarlicRegistry.SCROLL_ITEM.get()));
             }
+        }
+    }
+
+    @SubscribeEvent
+    public void playerClone(PlayerEvent.Clone event) {
+        var tag = event.getOriginal().getPersistentData().get("NocaetScroll");
+        if (tag != null) {
+            event.getPlayer().getPersistentData().put("NocaetScroll", tag);
         }
     }
 

@@ -8,6 +8,10 @@ import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Rarity;
+import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.biome.BiomeGenerationSettings;
+import net.minecraft.world.level.biome.BiomeSpecialEffects;
+import net.minecraft.world.level.biome.MobSpawnSettings;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.RotatedPillarBlock;
 import net.minecraft.world.level.block.SoundType;
@@ -28,6 +32,7 @@ public class GarlicRegistry {
 
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, GarlicMod.MODID);
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, GarlicMod.MODID);
+    public static final DeferredRegister<Biome> BIOMES = DeferredRegister.create(ForgeRegistries.BIOMES, GarlicMod.MODID);
     public static final TagKey<Item> FLAME_TAG = ItemTags.create(new ResourceLocation(GarlicMod.MODID, "flames"));
 
     public static final CreativeModeTab TAB = new CreativeModeTab(GarlicMod.MODID) {
@@ -47,6 +52,7 @@ public class GarlicRegistry {
     public static void register() {
         BLOCKS.register(FMLJavaModLoadingContext.get().getModEventBus());
         ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());
+        BIOMES.register(FMLJavaModLoadingContext.get().getModEventBus());
         registerBuiltin();
         registerFlames();
     }
@@ -85,12 +91,26 @@ public class GarlicRegistry {
                 .isValidSpawn((a, b, c, d) -> false).lightLevel(s -> 15).emissiveRendering((a, b, c) -> true)
         ));
         SCROLL_ITEM = ITEMS.register("elder_scroll", () -> new Item(new Item.Properties().tab(TAB)));
+        BIOMES.register("ash_lake", () -> new Biome.BiomeBuilder()
+            .precipitation(Biome.Precipitation.NONE)
+            .biomeCategory(Biome.BiomeCategory.OCEAN)
+            .temperature(0.5F)
+            .downfall(0.5F)
+            .specialEffects(new BiomeSpecialEffects.Builder()
+                .waterColor(0x45adf2)
+                .waterFogColor(0x041633)
+                .fogColor(0x4f5ad1)
+                .skyColor(0x4f5ad1)
+                .build())
+            .mobSpawnSettings(new MobSpawnSettings.Builder().build())
+            .generationSettings(new BiomeGenerationSettings.Builder().build())
+            .build());
     }
 
     private static void registerFlames() {
-        ITEMS.register("fading_flame", ()-> new Item(new Item.Properties().tab(TAB).rarity(Rarity.UNCOMMON)));
-        ITEMS.register("blood_flame", ()-> new Item(new Item.Properties().tab(TAB).rarity(Rarity.UNCOMMON)));
-        ITEMS.register("atziluth", ()-> new Item(new Item.Properties().tab(TAB).rarity(Rarity.UNCOMMON)));
-        ITEMS.register("spark_of_cosmo", ()-> new Item(new Item.Properties().tab(TAB).rarity(Rarity.UNCOMMON)));
+        ITEMS.register("fading_flame", () -> new Item(new Item.Properties().tab(TAB).rarity(Rarity.UNCOMMON)));
+        ITEMS.register("blood_flame", () -> new Item(new Item.Properties().tab(TAB).rarity(Rarity.UNCOMMON)));
+        ITEMS.register("atziluth", () -> new Item(new Item.Properties().tab(TAB).rarity(Rarity.UNCOMMON)));
+        ITEMS.register("spark_of_cosmo", () -> new Item(new Item.Properties().tab(TAB).rarity(Rarity.UNCOMMON)));
     }
 }
