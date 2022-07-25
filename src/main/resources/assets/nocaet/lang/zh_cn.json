@@ -18,5 +18,6 @@
   "nocaet.flame.tooltip": "TeaCon 2022 道具",
   "nocaet.flame.grant": "%1$s 点燃了%2$s, 因而大树倍加炽热",
   "nocaet.scroll.tooltip.clue": "指引传火者的古老卷轴\n几行文字浮现——",
-  "nocaet.scroll.tooltip.empty": "指引传火者的古老卷轴\n...已经感觉不到力量"
+  "nocaet.scroll.tooltip.empty": "指引传火者的古老卷轴\n...已经感觉不到力量",
+  "item.nocaet.spiritual_glow": "性灵之辉"
 }
