@@ -1,0 +1,8 @@
+{
+  "textures": [
+    "nocaet:leaves"
+  ],
+  "shimmer": {
+    "effect": "bloom_unreal"
+  }
+}

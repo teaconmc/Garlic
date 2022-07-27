@@ -56,7 +56,9 @@ public class PlayerData {
     public void load(Path path) throws IOException {
         this.map.clear();
         for (var group : ServerGroup.instance().getGroups()) {
-            try (var reader = Files.newBufferedReader(path.resolveSibling("data_" + group + ".yml"))) {
+            var data = path.resolve("data_" + group + ".json");
+            if (!Files.exists(data)) continue;
+            try (var reader = Files.newBufferedReader(data)) {
                 var map = this.map.computeIfAbsent(group, k -> new ConcurrentHashMap<>());
                 var obj = JsonParser.parseReader(reader).getAsJsonObject();
                 for (var s : obj.keySet()) {
@@ -72,9 +74,11 @@ public class PlayerData {
         for (var group : this.map.keySet()) {
             var map = this.map.get(group);
             var s = GSON.toJson(map.entrySet().stream().collect(Collectors.toMap(it -> it.getKey().toString(), Map.Entry::getValue)));
-            var oldData = path.resolveSibling("data_" + group + "_old.yml");
-            var newData = path.resolveSibling("data_" + group + ".yml");
-            Files.move(newData, oldData, StandardCopyOption.REPLACE_EXISTING);
+            var oldData = path.resolve("data_" + group + "_old.json");
+            var newData = path.resolve("data_" + group + ".json");
+            if (Files.exists(newData)) {
+                Files.move(newData, oldData, StandardCopyOption.REPLACE_EXISTING);
+            }
             Files.writeString(newData, s, StandardOpenOption.CREATE, StandardOpenOption.WRITE);
         }
     }

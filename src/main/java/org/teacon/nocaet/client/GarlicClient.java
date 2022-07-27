@@ -11,6 +11,7 @@ import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.client.event.ColorHandlerEvent;
 import net.minecraftforge.client.event.ModelRegistryEvent;
+import net.minecraftforge.client.event.ParticleFactoryRegisterEvent;
 import net.minecraftforge.client.event.RegisterShadersEvent;
 import net.minecraftforge.client.model.ModelLoaderRegistry;
 import net.minecraftforge.common.MinecraftForge;
@@ -21,6 +22,7 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.RegistryObject;
 import org.teacon.nocaet.GarlicMod;
 import org.teacon.nocaet.GarlicRegistry;
+import org.teacon.nocaet.client.particle.LeavesParticle;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -44,12 +46,17 @@ public class GarlicClient {
         FMLJavaModLoadingContext.get().getModEventBus().addListener(GarlicClient::blockColor);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(GarlicClient::registerShader);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(GarlicClient::registerModelLoader);
+        FMLJavaModLoadingContext.get().getModEventBus().addListener(GarlicClient::registerParticle);
         MinecraftForge.EVENT_BUS.addListener(EventPriority.LOW, GarlicClient::addTooltip);
         EXECUTOR.scheduleAtFixedRate(() -> Minecraft.getInstance().execute(CLUES::next), 10, 10, TimeUnit.MINUTES);
     }
 
     public static void refreshClues() {
         CLUES.shuffle();
+    }
+
+    private static void registerParticle(ParticleFactoryRegisterEvent event) {
+        Minecraft.getInstance().particleEngine.register(GarlicRegistry.LEAVES_PARTICLE.get(), LeavesParticle.Provider::new);
     }
 
     private static void registerModelLoader(ModelRegistryEvent event) {

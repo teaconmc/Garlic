@@ -22,6 +22,7 @@ public class GarlicCapability {
 
     private static void register(RegisterCapabilitiesEvent event) {
         event.register(FlameAdvancement.class);
+        event.register(Bind.class);
     }
 
     private static void attachPlayer(AttachCapabilitiesEvent<Entity> event) {

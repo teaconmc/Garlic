@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "nocaet:leaves",
+    "nocaet:leaves_large",
+    "nocaet:leaves_very_large",
+    "nocaet:leaves_shadow",
+    "nocaet:leaves_light"
+  ]
+}

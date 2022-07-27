@@ -1,6 +1,9 @@
 package org.teacon.nocaet;
 
+import net.minecraft.core.particles.ParticleType;
+import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.BlockItem;
@@ -33,7 +36,9 @@ public class GarlicRegistry {
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, GarlicMod.MODID);
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, GarlicMod.MODID);
     public static final DeferredRegister<Biome> BIOMES = DeferredRegister.create(ForgeRegistries.BIOMES, GarlicMod.MODID);
+    public static final DeferredRegister<ParticleType<?>> PARTICLE = DeferredRegister.create(ForgeRegistries.PARTICLE_TYPES, GarlicMod.MODID);
     public static final TagKey<Item> FLAME_TAG = ItemTags.create(new ResourceLocation(GarlicMod.MODID, "flames"));
+    public static final TagKey<Block> LEAVES_TAG = BlockTags.create(new ResourceLocation(GarlicMod.MODID, "leaves"));
 
     public static final CreativeModeTab TAB = new CreativeModeTab(GarlicMod.MODID) {
         @Override
@@ -43,6 +48,7 @@ public class GarlicRegistry {
     };
 
     public static RegistryObject<Item> SCROLL_ITEM;
+    public static RegistryObject<SimpleParticleType> LEAVES_PARTICLE;
 
     private static <T extends Block> void itemBlock(String name, Supplier<T> block) {
         var object = BLOCKS.register(name, block);
@@ -53,6 +59,7 @@ public class GarlicRegistry {
         BLOCKS.register(FMLJavaModLoadingContext.get().getModEventBus());
         ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());
         BIOMES.register(FMLJavaModLoadingContext.get().getModEventBus());
+        PARTICLE.register(FMLJavaModLoadingContext.get().getModEventBus());
         registerBuiltin();
         registerFlames();
     }
@@ -105,6 +112,7 @@ public class GarlicRegistry {
             .mobSpawnSettings(new MobSpawnSettings.Builder().build())
             .generationSettings(new BiomeGenerationSettings.Builder().build())
             .build());
+        LEAVES_PARTICLE = PARTICLE.register("leaves", () -> new SimpleParticleType(false));
     }
 
     private static void registerFlames() {

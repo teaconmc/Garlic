@@ -9,15 +9,12 @@ import net.md_5.bungee.event.EventHandler;
 import org.teacon.nocaet.bungee.network.Registry;
 import org.teacon.nocaet.bungee.network.packet.SetFlames;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.concurrent.TimeUnit;
 
 public final class GarlicBungee extends Plugin implements Listener {
 
-    private Path data;
     private final PlayerData playerData = new PlayerData();
 
     @Override
@@ -42,15 +39,12 @@ public final class GarlicBungee extends Plugin implements Listener {
     synchronized void loadData() throws IOException {
         Files.createDirectories(this.getDataFolder().toPath());
         ServerGroup.instance().reload();
-        this.data = new File(this.getDataFolder(), "data.yml").toPath();
-        if (Files.exists(this.data)) {
-            this.playerData.load(this.data);
-        }
+        this.playerData.load(this.getDataFolder().toPath());
     }
 
     private synchronized void save() {
         try {
-            this.playerData.save(this.data);
+            this.playerData.save(this.getDataFolder().toPath());
         } catch (IOException e) {
             this.getLogger().severe("Error saving data");
             e.printStackTrace();
