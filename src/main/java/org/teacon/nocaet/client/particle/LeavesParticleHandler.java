@@ -25,8 +25,8 @@ public class LeavesParticleHandler {
             var player = Minecraft.getInstance().player;
             var current = ThreadLocalRandom.current();
             var pos = new BlockPos.MutableBlockPos();
-            for (int x = -3; x < 4; x++) {
-                for (int z = -3; z < 4; z++) {
+            for (int x = -2; x < 3; x++) {
+                for (int z = -2; z < 3; z++) {
                     spawnParticles(level, level.getChunk(player.chunkPosition().x + x, player.chunkPosition().z + z), current, pos, player.position());
                 }
             }
