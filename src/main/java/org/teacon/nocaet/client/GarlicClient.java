@@ -111,7 +111,7 @@ public class GarlicClient {
         }
     }
 
-    private static List<Component> translatableText(String key) {
+    public static List<Component> translatableText(String key) {
         var lang = Language.getInstance();
         if (lang.has(key)) {
             var text = new ArrayList<Component>();

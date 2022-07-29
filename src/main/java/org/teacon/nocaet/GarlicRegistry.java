@@ -27,6 +27,7 @@ import net.minecraftforge.registries.RegistryObject;
 import org.jetbrains.annotations.NotNull;
 import org.teacon.nocaet.block.TransparentLeavesBlock;
 import org.teacon.nocaet.block.TransparentLogBlock;
+import org.teacon.nocaet.item.ItemWithTooltip;
 
 import java.util.List;
 import java.util.function.Supplier;
@@ -122,8 +123,8 @@ public class GarlicRegistry {
         ITEMS.register("spark_of_cosmo", () -> new Item(new Item.Properties().tab(TAB).rarity(Rarity.UNCOMMON)));
         ITEMS.register("spiritual_glow", () -> new Item(new Item.Properties().tab(TAB).rarity(Rarity.UNCOMMON)));
         ITEMS.register("bz_flame", () -> new Item(new Item.Properties().tab(TAB).rarity(Rarity.UNCOMMON)));
-        ITEMS.register("quantum_fruit", () -> new Item(new Item.Properties().tab(TAB).rarity(Rarity.UNCOMMON)));
-        ITEMS.register("quantum_skewer", () -> new Item(new Item.Properties().tab(TAB).rarity(Rarity.UNCOMMON)));
+        ITEMS.register("quantum_fruit", () -> new ItemWithTooltip(new Item.Properties().tab(TAB).rarity(Rarity.UNCOMMON)));
+        ITEMS.register("quantum_skewer", () -> new ItemWithTooltip(new Item.Properties().tab(TAB).rarity(Rarity.UNCOMMON)));
         ITEMS.register("blast_burst_quantum_skewer", () -> new Item(new Item.Properties().tab(TAB).rarity(Rarity.UNCOMMON)));
     }
 }
