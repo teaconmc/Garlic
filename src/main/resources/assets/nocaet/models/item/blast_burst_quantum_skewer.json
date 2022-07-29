@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/handheld",
+  "textures": {
+    "layer0": "nocaet:item/blast_burst_quantum_skewer"
+  }
+}
