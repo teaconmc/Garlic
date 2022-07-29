@@ -126,5 +126,6 @@ public class GarlicRegistry {
         ITEMS.register("quantum_fruit", () -> new ItemWithTooltip(new Item.Properties().tab(TAB).rarity(Rarity.UNCOMMON)));
         ITEMS.register("quantum_skewer", () -> new ItemWithTooltip(new Item.Properties().tab(TAB).rarity(Rarity.UNCOMMON)));
         ITEMS.register("blast_burst_quantum_skewer", () -> new Item(new Item.Properties().tab(TAB).rarity(Rarity.UNCOMMON)));
+        ITEMS.register("fire_in_time", () -> new Item(new Item.Properties().tab(TAB).rarity(Rarity.UNCOMMON)));
     }
 }
