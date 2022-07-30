@@ -33,7 +33,7 @@ float logistic(float x) {
 
 float conch(float x) {
     if (x < 0.4) {
-        return clamp(x, 0.1, 0.4);
+        return x - 0.125;
     } else {
         return logistic(x);
     }
@@ -54,7 +54,7 @@ void main() {
     }
     float timeVary = abs(1.0 - mod(nocaetNoise + GameTime * 600.0, 2.0)) + 0.000001;
     //vec3 hsvColor = vec3((1.0 / 6.0) - logistic(clamp((timeVary + 1.0) / 2.0, 0.0, 0.8)) / 6.0 * nocaetProgress, 0.875, clamp(timeVary, 0.625, 1));
-    vec3 hsvColor = vec3(0.16667 - logistic(conch(nocaetProgress) * clamp(timeVary, 0.0, 0.8)) / 6.0 , 0.875, arclight(nocaetProgress * timeVary));
+    vec3 hsvColor = vec3(0.16667 - logistic(conch(nocaetProgress) * timeVary) / 6.0 , 0.875, arclight(nocaetProgress * timeVary));
     vec3 rgbColor = hsv2rgb(hsvColor);
     fragColor = linear_fog(color * vec4(rgbColor, 1.0), vertexDistance, FogStart, FogEnd, FogColor);
 }
