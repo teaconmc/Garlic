@@ -35,13 +35,13 @@ public class LeavesParticleHandler {
 
     private static void spawnParticles(ClientLevel level, ChunkAccess chunk, Random random, BlockPos.MutableBlockPos pos, Vec3 position) {
         int count = switch (Minecraft.getInstance().options.particles) {
-            case ALL -> 8;
-            case DECREASED -> 4;
+            case ALL -> 16;
+            case DECREASED -> 8;
             default -> 0;
         };
         for (int i = 0; i < count; i++) {
             pos.set(random.nextInt(16),
-                random.nextInt(chunk.getMaxBuildHeight() - chunk.getMinBuildHeight()) + chunk.getMinBuildHeight(),
+                random.nextInt(128) + 128,
                 random.nextInt(16));
             if (chunk.getBlockState(pos).is(GarlicRegistry.LEAVES_TAG)) {
                 var y = position.y + random.nextInt(32) - 5;

@@ -19,7 +19,7 @@ import java.util.UUID;
 
 public class Bind {
 
-    static final ResourceLocation ID = new ResourceLocation(GarlicMod.MODID, "progress");
+    static final ResourceLocation ID = new ResourceLocation(GarlicMod.MODID, "bind");
 
     private UUID owner;
     private Instant instant;

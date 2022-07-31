@@ -17,12 +17,12 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @ParametersAreNonnullByDefault
 public class LeavesParticle extends TextureSheetParticle {
 
-    private static final int LIFETIME = 200;
+    private static final int LIFETIME = 400;
     private static final float HALF_LIFE = LIFETIME / 2F;
 
     protected LeavesParticle(ClientLevel p_108328_, double p_108329_, double p_108330_, double p_108331_, double p_108332_, double p_108333_, double p_108334_) {
         super(p_108328_, p_108329_, p_108330_, p_108331_, p_108332_, p_108333_, p_108334_);
-        this.gravity = 0.01F;
+        this.gravity = 0.008F;
         this.lifetime = LIFETIME;
         if (GarlicShaders.getProgress() < Math.random()) {
             // FFCC00
