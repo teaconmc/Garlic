@@ -4,6 +4,7 @@ import net.minecraft.Util;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.ChatType;
 import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.server.TickTask;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerListener;
@@ -64,13 +65,22 @@ public class GarlicEvents {
             if (pContainerToSend == player.inventoryMenu && !(pContainerToSend.getSlot(pSlotInd) instanceof ResultSlot)
                 && player.gameMode.isSurvival()) {
                 if (pStack.is(GarlicRegistry.FLAME_TAG)) {
-                    pStack.getCapability(GarlicCapability.bind())
-                        .filter(it -> it.bindTo(player))
-                        .flatMap(it -> player.getCapability(GarlicCapability.flames()).resolve())
-                        .ifPresent(it -> {
-                            grantAndBroadcast(player, it, pStack);
-                            pContainerToSend.getSlot(pSlotInd).set(pStack);
-                        });
+                    var server = ServerLifecycleHooks.getCurrentServer();
+                    server.tell(new TickTask(server.getTickCount(), () -> {
+                        if (player.isAddedToWorld()) {
+                            var slot = player.inventoryMenu.getSlot(pSlotInd);
+                            if (slot.getItem().is(GarlicRegistry.FLAME_TAG)) {
+                                var stack = slot.getItem().copy();
+                                stack.getCapability(GarlicCapability.bind())
+                                    .filter(it -> it.bindTo(player))
+                                    .flatMap(it -> player.getCapability(GarlicCapability.flames()).resolve())
+                                    .ifPresent(it -> {
+                                        grantAndBroadcast(player, it, stack);
+                                        slot.set(stack);
+                                    });
+                            }
+                        }
+                    }));
                 }
             }
         }
