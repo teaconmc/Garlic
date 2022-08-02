@@ -49,7 +49,7 @@
   "item.semishigure.flame_semishigure.tooltip": "You can't let yourself be held back by common sense in TeaCon, right!?",
   "item.semishigure.flame_icaruswings.clue": "At the very top of the monumental totem\nWhere the sun melts away the waxy wings",
   "item.semishigure.flame_pyrotechnicraft.clue": "Fireworks, should we see it from the sky or the ground?",
-  "item.semishigure.flame_semishigure.clue": "On the gate of the shrine that exists on both sides..."
+  "item.semishigure.flame_semishigure.clue": "On the gate of the shrine that exists on both sides...",
   "itemGroup.nocaet": "noCaeT",
   "nocaet.command.lookup": "%1$s has %2$s out of %3$s flames",
   "nocaet.command.lookup.granted": "[+] ",
@@ -58,5 +58,8 @@
   "nocaet.flame.tooltip": "TeaCon 2022 Collections",
   "nocaet.flame.grant": "O! %1$s hath receiv'd the %2$s, now the Tree burnes stronger",
   "nocaet.scroll.tooltip.clue": "The Scroll guides the the Fire Keeper\nwith words on it...",
-  "nocaet.scroll.tooltip.empty": "The Scroll guides the the Fire Keeper\n...but the power is gone."
+  "nocaet.scroll.tooltip.empty": "The Scroll guides the the Fire Keeper\n...but the power is gone.",
+  "item.nocaet.wooden_bar_with_spark": "Burnt torch (Wooden bar with spark)",
+  "item.nocaet.wooden_bar_with_spark.tooltip": "Nuclear torches will also burn out one day\nBut there is still residual temperature",
+  "item.nocaet.wooden_bar_with_spark.clue": "Find the torch where it is frequently used"
 }

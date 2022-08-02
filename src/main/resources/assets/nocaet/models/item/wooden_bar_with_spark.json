@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/handheld",
+  "textures": {
+    "layer0": "nocaet:item/wooden_bar_with_spark"
+  }
+}
