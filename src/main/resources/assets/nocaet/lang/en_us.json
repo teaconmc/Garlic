@@ -44,12 +44,12 @@
   "item.nocaet.floo_flame.clue": "Don't let frustration control your next move.",
   "item.nocaet.floo_flame.tooltip": "Floo powder is on fire,\nit fills you with determination.",
   "item.semishigure.flame_semishigure": "Rekindled \"The Embers of Love\"",
-	"item.semishigure.flame_icaruswings.tooltip": "If I don't take Master to Synapse now\nNo one will be able to\nAnd we can never save this world Master belongs to",
-	"item.semishigure.flame_pyrotechnicraft.tooltip": "The summer light ignites and drops\nCan I fall in love with you?",
-	"item.semishigure.flame_semishigure.tooltip": "You can't let yourself be held back by common sense in TeaCon, right!?",
-	"item.semishigure.flame_icaruswings.clue": "At the very top of the monumental totem\nWhere the sun melts away the waxy wings",
-	"item.semishigure.flame_pyrotechnicraft.clue": "Fireworks, should we see it from the sky or the ground?",
-	"item.semishigure.flame_semishigure.clue": "On the gate of the shrine that exists on both sides..."
+  "item.semishigure.flame_icaruswings.tooltip": "If I don't take Master to Synapse now\nNo one will be able to\nAnd we can never save this world Master belongs to",
+  "item.semishigure.flame_pyrotechnicraft.tooltip": "The summer light ignites and drops\nCan I fall in love with you?",
+  "item.semishigure.flame_semishigure.tooltip": "You can't let yourself be held back by common sense in TeaCon, right!?",
+  "item.semishigure.flame_icaruswings.clue": "At the very top of the monumental totem\nWhere the sun melts away the waxy wings",
+  "item.semishigure.flame_pyrotechnicraft.clue": "Fireworks, should we see it from the sky or the ground?",
+  "item.semishigure.flame_semishigure.clue": "On the gate of the shrine that exists on both sides..."
   "itemGroup.nocaet": "noCaeT",
   "nocaet.command.lookup": "%1$s has %2$s out of %3$s flames",
   "nocaet.command.lookup.granted": "[+] ",
