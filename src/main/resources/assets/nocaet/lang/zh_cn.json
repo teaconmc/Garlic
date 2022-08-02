@@ -40,7 +40,7 @@
   "nocaet.scroll.tooltip.clue": "指引传火者的古老卷轴\n几行文字浮现——",
   "nocaet.scroll.tooltip.empty": "指引传火者的古老卷轴\n...已经感觉不到力量",
   "item.nocaet.spiritual_glow": "性灵之辉",
-  "item.nocaet.wooden_bar_with_spark": "燃尽的火把（带火星的木条）",
+  "item.nocaet.wooden_bar_with_spark": "燃尽的火把",
   "item.nocaet.wooden_bar_with_spark.tooltip": "核能火把也有燃尽的一天\n不过仍存余温",
   "item.nocaet.wooden_bar_with_spark.clue": "在频繁使用火把的地方找到它"
 }
