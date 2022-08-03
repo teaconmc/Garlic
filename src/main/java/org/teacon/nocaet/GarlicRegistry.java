@@ -129,5 +129,6 @@ public class GarlicRegistry {
         ITEMS.register("fire_in_time", () -> new Item(new Item.Properties().tab(TAB).rarity(Rarity.UNCOMMON)));
         ITEMS.register("floo_flame", () -> new Item(new Item.Properties().tab(TAB).rarity(Rarity.UNCOMMON)));
         ITEMS.register("wooden_bar_with_spark", () -> new Item(new Item.Properties().tab(TAB).rarity(Rarity.UNCOMMON)));
+        ITEMS.register("burning_book", () -> new Item(new Item.Properties().tab(TAB).rarity(Rarity.UNCOMMON)));
     }
 }
