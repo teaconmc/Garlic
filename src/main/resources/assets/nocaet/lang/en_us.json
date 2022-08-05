@@ -53,6 +53,9 @@
   "item.noceat.burning_book": "451°F Flame",
   "item.noceat.burning_book.tooltip": "Even if ██ ███ ███████\nIt will all be ████████ by ███████",
   "item.noceat.burning_book.clue": "The flame brings creativity, the flame destroys creativity.",
+  "item.nocaet.mysterious_meatballs": "Mysterious Meatballs",
+  "item.nocaet.mysterious_meatballs.clue": "Trials under the ruins of sickly city",
+  "item.nocaet.mysterious_meatballs.tooltip": "It's a classic but novel cuisine cooked in the Crock Pot.\nIt is cooked with a mysterious ingredient so it tastes a little off.",
   "itemGroup.nocaet": "noCaeT",
   "nocaet.command.lookup": "%1$s has %2$s out of %3$s flames",
   "nocaet.command.lookup.granted": "[+] ",
@@ -64,5 +67,8 @@
   "nocaet.scroll.tooltip.empty": "The Scroll guides the the Fire Keeper\n...but the power is gone.",
   "item.nocaet.wooden_bar_with_spark": "Burnt torch",
   "item.nocaet.wooden_bar_with_spark.tooltip": "Nuclear torches will also burn out one day\nBut there is still residual temperature",
-  "item.nocaet.wooden_bar_with_spark.clue": "Find the torch where it is frequently used"
+  "item.nocaet.wooden_bar_with_spark.clue": "Find the torch where it is frequently used",
+  "item.nocaet.endless_flame": "Endless Flame",
+  "item.nocaet.endless_flame.clue": "An unquenchable soul.",
+  "item.nocaet.endless_flame.tooltip": "A flame that cannot be extinguished，\nwhich burn on a soul for thousands years，\nThere's no end to the pain。\n生き延びろ……"
 }

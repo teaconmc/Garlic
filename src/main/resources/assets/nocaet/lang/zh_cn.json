@@ -35,6 +35,9 @@
   "item.noceat.burning_book": "华氏451度的火",
   "item.noceat.burning_book.tooltip": "即使██████\n████也会被z███全部████\n不如████████████",
   "item.noceat.burning_book.clue": "火焰带来灵感，也会扼杀灵感。",
+  "item.nocaet.mysterious_meatballs": "神秘肉丸",
+  "item.nocaet.mysterious_meatballs.clue": "暴食遗迹之下的试炼",
+  "item.nocaet.mysterious_meatballs.tooltip": "产自烹饪锅的料理，经典又新奇。\n使用了某种神秘食材，有点让人无从下口。",
   "itemGroup.nocaet": "noCaeT",
   "nocaet.command.lookup": "%1$s 拥有 %3$s 个火焰中的 %2$s 个",
   "nocaet.command.progress": "进度设置为 %s",
@@ -45,5 +48,8 @@
   "item.nocaet.spiritual_glow": "性灵之辉",
   "item.nocaet.wooden_bar_with_spark": "燃尽的火把",
   "item.nocaet.wooden_bar_with_spark.tooltip": "核能火把也有燃尽的一天\n不过仍存余温",
-  "item.nocaet.wooden_bar_with_spark.clue": "在频繁使用火把的地方找到它"
+  "item.nocaet.wooden_bar_with_spark.clue": "在频繁使用火把的地方找到它",
+  "item.nocaet.endless_flame": "无尽之火",
+  "item.nocaet.endless_flame.clue": "无法熄灭之人",
+  "item.nocaet.endless_flame.tooltip": "无法被熄灭的火焰，\n在某个不朽的灵魂上燃烧了数万年，\n承受着无尽的痛苦。\n活下去……"
 }
