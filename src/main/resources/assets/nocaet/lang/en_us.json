@@ -61,5 +61,8 @@
   "nocaet.scroll.tooltip.empty": "The Scroll guides the the Fire Keeper\n...but the power is gone.",
   "item.nocaet.wooden_bar_with_spark": "Burnt torch",
   "item.nocaet.wooden_bar_with_spark.tooltip": "Nuclear torches will also burn out one day\nBut there is still residual temperature",
-  "item.nocaet.wooden_bar_with_spark.clue": "Find the torch where it is frequently used"
+  "item.nocaet.wooden_bar_with_spark.clue": "Find the torch where it is frequently used",
+  "item.nocaet.endless_flame": "Endless Flame",
+  "item.nocaet.endless_flame.clue": "An unquenchable soul.",
+  "item.nocaet.endless_flame.tooltip": "A flame that cannot be extinguished，\nwhich burn on a soul for thousands years，\nThere's no end to the pain。\n生き延びろ……"
 }
