@@ -45,5 +45,8 @@
   "item.nocaet.spiritual_glow": "性灵之辉",
   "item.nocaet.wooden_bar_with_spark": "燃尽的火把",
   "item.nocaet.wooden_bar_with_spark.tooltip": "核能火把也有燃尽的一天\n不过仍存余温",
-  "item.nocaet.wooden_bar_with_spark.clue": "在频繁使用火把的地方找到它"
+  "item.nocaet.wooden_bar_with_spark.clue": "在频繁使用火把的地方找到它",
+  "item.nocaet.endless_flame": "无尽之火",
+  "item.nocaet.endless_flame.clue": "无法熄灭之人",
+  "item.nocaet.endless_flame.tooltip": "无法被熄灭的火焰，\n在某个不朽的灵魂上燃烧了数万年，\n承受着无尽的痛苦。\n活下去……"
 }
