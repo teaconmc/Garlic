@@ -98,7 +98,7 @@ public class GarlicRegistry {
             BlockBehaviour.Properties.of(Material.LEAVES).strength(0.2F).sound(SoundType.GRASS).noOcclusion()
                 .isValidSpawn((a, b, c, d) -> false).lightLevel(s -> 15).emissiveRendering((a, b, c) -> true)
         ));
-        SCROLL_ITEM = ITEMS.register("elder_scroll", () -> new Item(new Item.Properties().tab(TAB)));
+        SCROLL_ITEM = ITEMS.register("elder_scroll", () -> new Item(new Item.Properties().tab(TAB).rarity(Rarity.RARE)));
         BIOMES.register("ash_lake", () -> new Biome.BiomeBuilder()
             .precipitation(Biome.Precipitation.NONE)
             .biomeCategory(Biome.BiomeCategory.OCEAN)

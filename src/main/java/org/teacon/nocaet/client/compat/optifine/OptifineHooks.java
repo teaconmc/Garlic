@@ -208,18 +208,38 @@ public class OptifineHooks {
             vec3 p = abs(fract(c.xxx + K.xyz) * 6.0 - K.www);
             return c.z * mix(K.xxx, clamp(p - K.xxx, 0.0, 1.0), c.y);
         }
+        
+        float nocaet_logistic(float x) {
+            return 1.0 / (1.0 + pow(2.71828, -x * 5));
+        }
+        
+        float nocaet_conch(float x) {
+            if (x < 0.4) {
+                return x - 0.125;
+            } else {
+                return nocaet_logistic(x);
+            }
+        }
+        
+        float nocaet_arclight(float x) {
+            if (x < 0.5) {
+                return 1;
+            } else {
+                return 1 - x / 2.0;
+            }
+        }
                 
         uniform float nocaetProgress;
         in float nocaetNoise;
                 
         void main() {
-        	nocaet_main(); // original main
-        	if (nocaetNoise > -100.0) {
-        		float timeVary = abs(1.0 - mod(nocaetNoise + frameTimeCounter / 2.0, 2.0)) + 0.000001;
-            	vec3 hsvColor = vec3((1.0 / 6.0) - clamp((timeVary + 1.0) / 2.0, 0.0, 1.0) / 6.0 * nocaetProgress, 0.875, 1.0);
-            	vec3 rgbColor = nocaet_hsv2rgb(hsvColor);
-            	gl_FragData[0] = gl_FragData[0] * vec4(rgbColor, 1.0);
-        	}
+            nocaet_main(); // original main
+            if (nocaetNoise > -100.0) {
+                float timeVary = abs(1.0 - mod(nocaetNoise + frameTimeCounter / 4.0, 2.0)) + 0.000001;
+                vec3 hsvColor = vec3(0.16667 - nocaet_logistic(nocaet_conch(nocaetProgress) * timeVary) / 6.0 , 0.875, nocaet_arclight(nocaetProgress * timeVary));
+                vec3 rgbColor = nocaet_hsv2rgb(hsvColor);
+                gl_FragData[0] = gl_FragData[0] * vec4(rgbColor, 1.0);
+            }
         }
         """;
 }

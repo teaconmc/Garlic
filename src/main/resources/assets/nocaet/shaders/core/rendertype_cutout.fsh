@@ -52,7 +52,7 @@ void main() {
     if (color.a < 0.1) {
         discard;
     }
-    float timeVary = abs(1.0 - mod(nocaetNoise + GameTime * 600.0, 2.0)) + 0.000001;
+    float timeVary = abs(1.0 - mod(nocaetNoise + GameTime * 300.0, 2.0)) + 0.000001;
     //vec3 hsvColor = vec3((1.0 / 6.0) - logistic(clamp((timeVary + 1.0) / 2.0, 0.0, 0.8)) / 6.0 * nocaetProgress, 0.875, clamp(timeVary, 0.625, 1));
     vec3 hsvColor = vec3(0.16667 - logistic(conch(nocaetProgress) * timeVary) / 6.0 , 0.875, arclight(nocaetProgress * timeVary));
     vec3 rgbColor = hsv2rgb(hsvColor);

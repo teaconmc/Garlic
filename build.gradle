@@ -26,7 +26,7 @@ java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 // definitions at gradle/teacon-forge.gradle
 teacon {
     modId = 'nocaet'
-    modVersion = '1.1.2'
+    modVersion = '1.2.0'
     modLicense = 'GPL-3.0'
     modGitHubRepo = 'teaconmc/Garlic'
     modAuthors = ['IzzelAliz']
