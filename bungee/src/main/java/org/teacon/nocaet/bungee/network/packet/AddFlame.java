@@ -23,7 +23,8 @@ public record AddFlame(UUID uuid, String namespace, String item) implements Pack
         var plugin = (GarlicBungee) ProxyServer.getInstance().getPluginManager().getPlugin("noCaeT");
         var playerData = plugin.getPlayerData();
         playerData.add(sender.getInfo(), uuid, namespace);
-        plugin.getLogger().info("" + uuid + " claimed " + namespace);
+        var claimPlayer = ProxyServer.getInstance().getPlayer(uuid);
+        plugin.getLogger().info("" + uuid + "(" + (claimPlayer == null ? "OFFLINE" : claimPlayer.getName()) + ") claimed " + namespace);
         var message = new TranslatableComponent("nocaet.flame.grant",
             ProxyServer.getInstance().getPlayer(uuid).getDisplayName(), getItem());
         for (var server : ServerGroup.instance().getOtherServers(sender.getInfo())) {
@@ -31,7 +32,7 @@ public record AddFlame(UUID uuid, String namespace, String item) implements Pack
                 player.sendMessage(message);
             }
         }
-        // todo calculate progress and broadcast
+        playerData.updateProgress(sender.getInfo());
     }
 
     @Override

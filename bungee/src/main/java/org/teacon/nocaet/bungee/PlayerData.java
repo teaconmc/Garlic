@@ -12,6 +12,8 @@ import com.google.gson.JsonParser;
 import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
 import net.md_5.bungee.api.config.ServerInfo;
+import org.teacon.nocaet.bungee.network.Registry;
+import org.teacon.nocaet.bungee.network.packet.SyncProgress;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
@@ -23,6 +25,7 @@ import java.time.Instant;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
@@ -30,10 +33,13 @@ import java.util.stream.Collectors;
 
 public class PlayerData {
 
+    private static final int TARGET = 10000;
+
     private static final Gson GSON = new GsonBuilder()
         .registerTypeAdapter(Claim.class, new Claim.Serializer()).disableHtmlEscaping().setPrettyPrinting().create();
 
     private final Map<String, Map<UUID, Set<Claim>>> map = new ConcurrentHashMap<>();
+    private final Map<String, Integer> progress = new ConcurrentHashMap<>();
 
     public void add(ServerInfo info, UUID uuid, String name) {
         var group = ServerGroup.instance().getGroup(info);
@@ -55,6 +61,7 @@ public class PlayerData {
     @SuppressWarnings("UnstableApiUsage")
     public void load(Path path) throws IOException {
         this.map.clear();
+        this.progress.clear();
         for (var group : ServerGroup.instance().getGroups()) {
             var data = path.resolve("data_" + group + ".json");
             if (!Files.exists(data)) continue;
@@ -66,6 +73,7 @@ public class PlayerData {
                     map.put(UUID.fromString(s), set);
                     set.addAll(GSON.fromJson(obj.get(s), new TypeToken<List<Claim>>() {}.getType()));
                 }
+                this.progress.put(group, map.values().stream().mapToInt(Set::size).sum());
             }
         }
     }
@@ -81,6 +89,24 @@ public class PlayerData {
             }
             Files.writeString(newData, s, StandardOpenOption.CREATE, StandardOpenOption.WRITE);
         }
+    }
+
+    public void updateProgress(ServerInfo server) {
+        var group = ServerGroup.instance().getGroup(server);
+        if (group != null) {
+            var result = this.progress.compute(group, (k, v) -> v == null ? 1 : v + 1);
+            var progress = Math.min(result.floatValue() / TARGET, 1F);
+            var packet = new SyncProgress(progress);
+            for (ServerInfo info : ServerGroup.instance().getServers(server)) {
+                Registry.instance().sendToClient(packet, info);
+            }
+        }
+    }
+
+    public Optional<Float> getProgress(ServerInfo server) {
+        return Optional.ofNullable(ServerGroup.instance().getGroup(server))
+            .map(this.progress::get)
+            .map(it -> it.floatValue() / TARGET);
     }
 
     private record Claim(String name, Instant instant) {

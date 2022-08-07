@@ -4,6 +4,7 @@ import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 import net.md_5.bungee.api.ProxyServer;
 import net.md_5.bungee.api.config.ServerInfo;
+import net.md_5.bungee.api.connection.ProxiedPlayer;
 import org.teacon.nocaet.bungee.network.packet.AddFlame;
 import org.teacon.nocaet.bungee.network.packet.SetFlames;
 import org.teacon.nocaet.bungee.network.packet.SyncProgress;
@@ -63,5 +64,17 @@ public class Registry {
         for (ServerInfo info : ProxyServer.getInstance().getServers().values()) {
             info.sendData("nocaet:proxy", bytes);
         }
+    }
+
+    public void sendToClient(Packet packet, ServerInfo server) {
+        var bytes = encode(packet);
+        for (ProxiedPlayer player : server.getPlayers()) {
+            player.sendData("nocaet:ch", bytes);
+        }
+    }
+
+    public void sendToClient(Packet packet, ProxiedPlayer player) {
+        var bytes = encode(packet);
+        player.sendData("nocaet:ch", bytes);
     }
 }

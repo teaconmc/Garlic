@@ -8,6 +8,7 @@ import net.md_5.bungee.api.plugin.Plugin;
 import net.md_5.bungee.event.EventHandler;
 import org.teacon.nocaet.bungee.network.Registry;
 import org.teacon.nocaet.bungee.network.packet.SetFlames;
+import org.teacon.nocaet.bungee.network.packet.SyncProgress;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -75,6 +76,11 @@ public final class GarlicBungee extends Plugin implements Listener {
         var list = getPlayerData().getAll(server.getInfo(), uuid);
         if (list != null) {
             Registry.instance().send(new SetFlames(uuid, list), server.getInfo());
+        }
+        var optional = getPlayerData().getProgress(server.getInfo());
+        if (optional.isPresent()) {
+            var progress = optional.get();
+            Registry.instance().sendToClient(new SyncProgress(progress), event.getPlayer());
         }
     }
 }
