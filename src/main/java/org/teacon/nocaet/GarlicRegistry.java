@@ -119,6 +119,7 @@ public class GarlicRegistry {
     private static void registerFlames() {
         ITEMS.register("fading_flame", () -> new Item(new Item.Properties().tab(TAB).rarity(Rarity.UNCOMMON)));
         ITEMS.register("blood_flame", () -> new Item(new Item.Properties().tab(TAB).rarity(Rarity.UNCOMMON)));
+        ITEMS.register("cinnabar_amulet", () -> new Item(new Item.Properties().tab(TAB).rarity(Rarity.UNCOMMON)));
         ITEMS.register("atziluth", () -> new Item(new Item.Properties().tab(TAB).rarity(Rarity.UNCOMMON)));
         ITEMS.register("spark_of_cosmo", () -> new Item(new Item.Properties().tab(TAB).rarity(Rarity.UNCOMMON)));
         ITEMS.register("spiritual_glow", () -> new Item(new Item.Properties().tab(TAB).rarity(Rarity.UNCOMMON)));

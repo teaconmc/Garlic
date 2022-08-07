@@ -29,7 +29,7 @@ displayName = "nocaet" #mandatory
 # A file name (in the root of the mod JAR) containing a logo for display
 #logoFile="nocaet.png" #optional
 # A text field displayed in the mod UI
-#credits="Thanks for this example mod goes to Java" #optional
+credits="Xe_Kr,MalayP,contributors" #optional
 # A text field displayed in the mod UI
 authors = "IzzelAliz" #optional
 # The description text for the mod (multi line!) (#mandatory)
