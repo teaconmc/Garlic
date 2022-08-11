@@ -7,3 +7,4 @@ groups:
     group: 'default'
 # default: null
 default: 'default'
+tab_footer: '&6&l您已收集 %d 个火种'

@@ -15,7 +15,7 @@ dependencies {
 def identifier = System.env.VERSION_IDENTIFIER
 
 group = 'org.teacon'
-version = '1.0.0' + (identifier ? '-' + identifier : '')
+version = rootProject.teacon.modVersion.get() + (identifier ? '-' + identifier : '')
 archivesBaseName = 'Garlic-Bungee-1.18'
 
 java {

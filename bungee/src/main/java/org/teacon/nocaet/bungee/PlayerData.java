@@ -25,6 +25,7 @@ import java.time.Instant;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
@@ -40,6 +41,11 @@ public class PlayerData {
 
     private final Map<String, Map<UUID, Set<Claim>>> map = new ConcurrentHashMap<>();
     private final Map<String, Integer> progress = new ConcurrentHashMap<>();
+
+    public Map<UUID, Set<Claim>> getGroup(String group) {
+        var map = this.map.get(group);
+        return map == null ? Map.of() : map;
+    }
 
     public void add(ServerInfo info, UUID uuid, String name) {
         var group = ServerGroup.instance().getGroup(info);
@@ -109,7 +115,20 @@ public class PlayerData {
             .map(it -> it.floatValue() / TARGET);
     }
 
-    private record Claim(String name, Instant instant) {
+    public record Claim(String name, Instant instant) {
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+            Claim claim = (Claim) o;
+            return Objects.equals(name, claim.name);
+        }
+
+        @Override
+        public int hashCode() {
+            return name != null ? name.hashCode() : 0;
+        }
 
         static class Serializer implements JsonSerializer<Claim>, JsonDeserializer<Claim> {
 

@@ -2,6 +2,7 @@ package org.teacon.nocaet.bungee;
 
 import net.md_5.bungee.api.ProxyServer;
 import net.md_5.bungee.api.config.ServerInfo;
+import net.md_5.bungee.config.Configuration;
 import net.md_5.bungee.config.ConfigurationProvider;
 import net.md_5.bungee.config.YamlConfiguration;
 
@@ -27,9 +28,8 @@ public class ServerGroup {
     private final Map<String, String> serverToGroup = new HashMap<>();
     private String defaultGroup;
 
-    public void reload() throws IOException {
+    public Configuration reload(GarlicBungee plugin) throws IOException {
         var provider = ConfigurationProvider.getProvider(YamlConfiguration.class);
-        var plugin = (GarlicBungee) ProxyServer.getInstance().getPluginManager().getPlugin("noCaeT");
         var config = plugin.getDataFolder().toPath().resolve("config.yml");
         if (!Files.exists(config)) {
             Files.write(config, plugin.getResourceAsStream("config.yml").readAllBytes(), StandardOpenOption.WRITE, StandardOpenOption.CREATE);
@@ -49,6 +49,7 @@ public class ServerGroup {
             }
         }
         this.defaultGroup = configuration.getString("default");
+        return configuration;
     }
 
     public Collection<String> getGroups() {

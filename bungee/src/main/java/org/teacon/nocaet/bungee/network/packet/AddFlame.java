@@ -25,6 +25,9 @@ public record AddFlame(UUID uuid, String namespace, String item) implements Pack
         playerData.add(sender.getInfo(), uuid, namespace);
         var claimPlayer = ProxyServer.getInstance().getPlayer(uuid);
         plugin.getLogger().info("" + uuid + "(" + (claimPlayer == null ? "OFFLINE" : claimPlayer.getName()) + ") claimed " + namespace);
+        if (claimPlayer != null) {
+            plugin.updateFooter(claimPlayer);
+        }
         var message = new TranslatableComponent("nocaet.flame.grant",
             ProxyServer.getInstance().getPlayer(uuid).getDisplayName(), getItem());
         for (var server : ServerGroup.instance().getOtherServers(sender.getInfo())) {
