@@ -41,9 +41,9 @@ float conch(float x) {
 
 float arclight(float x) {
     if (x < 0.5) {
-        return 1;
+        return 1.0;
     } else {
-        return 1 - x / 2.0;
+        return 1.0 - x / 2.0;
     }
 }
 
